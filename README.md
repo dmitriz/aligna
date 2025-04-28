@@ -1,4 +1,4 @@
-# 📚 Aligna — Friendly Review Guide
+# 📚 **Aligna** — Friendly Review Guide
 
 ---
 
@@ -29,7 +29,7 @@
 ## ⏳ Wait — Aren't There Already Solutions?
 
 - If you know a great tool, checklist, or project that solves this, we would love to hear about it!
-- [Drop your suggestions or links here](../../issues/new?template=feedback-template.md).
+- [Drop your suggestions or links here](/issues/new?template=feedback-template.md).
 - Even just a quick link is appreciated!
 
 ---
