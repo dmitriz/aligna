@@ -1,4 +1,4 @@
-# 📚 Aligna — Friendly Review Guide
+# 📚 **Aligna** — Friendly Review Guide
 
 ---
 
