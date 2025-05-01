@@ -1,5 +1,7 @@
 # 📚 **Aligna AI** — Review Guidelines for AI Agents
 
+> **Aligna is a framework specifically designed for AI agent reviewers** to provide structured, consistent, and helpful feedback on code, documentation, and research content. It offers guidelines, checklists, and metrics to improve the quality of automated reviews while maintaining a focus on actionable feedback and effective communication.
+
 ---
 
 ## 📌 Why This Project?

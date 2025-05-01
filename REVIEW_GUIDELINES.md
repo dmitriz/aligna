@@ -4,6 +4,8 @@
 - These guidelines aim to make reviews smooth, enjoyable, and focused on high-quality contributions.
 - Feel free to follow them as much as you find helpful.
 
+> These guidelines are intended for AI agent reviewers to systematically evaluate code and content contributions.
+
 ---
 
 ## ⭐ Principles We Aim For
