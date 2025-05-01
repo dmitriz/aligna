@@ -4,6 +4,14 @@ This guide explains **how** to effectively implement the Aligna AI review guidel
 
 ## 🏁 Getting Started
 
+### Prerequisites
+
+Before you begin, ensure you have the following:
+
+- Supported languages/frameworks: Python 3.8+, Node.js 14+, or equivalent
+- Required tools: Git, a text editor (e.g., VS Code), and a terminal
+- API keys or credentials for any integrated services
+
 ### For AI Agent Teams
 
 1. **Initial Configuration**
@@ -13,6 +21,7 @@ This guide explains **how** to effectively implement the Aligna AI review guidel
 
 2. **Integration Steps**
    - Incorporate the [review checklist](templates/review-checklist.md) into your AI agents' review protocol
+   - Verify that the path `templates/review-checklist.md` works in CI and local contexts
    - Create domain-specific versions of the checklist if needed
    - Establish baseline metrics for comparison
 
@@ -86,9 +95,17 @@ The improved navigation structure makes the docs much more usable.
 
 ## 🔄 Adapting to Your Context
 
-- **For Open Source Projects**: Focus on clear contribution guidelines and community standards
-- **For Academic Papers**: Emphasize clarity of methodology and strength of conclusions
-- **For Design Reviews**: Adapt to include user experience considerations and design principles
+### For Open Source Projects
+
+Focus on clear contribution guidelines and community standards.
+
+#### For Academic Papers
+
+Emphasize clarity of methodology and strength of conclusions.
+
+#### For Design Reviews
+
+Adapt to include user experience considerations and design principles.
 
 Remember that Aligna is a framework, not a strict rulebook. Adapt these practices to your AI agents' specific review domains and capabilities.
 

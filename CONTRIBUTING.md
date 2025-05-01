@@ -4,7 +4,7 @@ Thanks for your interest in improving Aligna! We value simplicity and clarity.
 
 ## How to Contribute
 
-1. **Suggestions**: Open an issue using the feedback template
+1. **Suggestions**: Open an issue using the [feedback template](.github/ISSUE_TEMPLATE/feedback-template.md)
 2. **Improvements**: Submit a pull request with your changes
 3. **Questions**: Start a discussion in the issues section
 
