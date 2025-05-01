@@ -1,4 +1,4 @@
-# 📚 **Aligna** — Friendly Review Guide
+# 📚 **Aligna AI** — Review Guidelines for AI Agents
 
 ---
 
@@ -15,8 +15,7 @@
 - Check our [Review Guidelines](REVIEW_GUIDELINES.md).
 - See our practical [Review Checklist](templates/review-checklist.md) for immediate use.
 - Learn how to [Measure Improvements](METRICS.md) from using these guidelines.
-- A simple guide that aims to make reviews smoother and more helpful.
-- Contributions, suggestions, and improvements are always welcome!
+- Follow our [Usage Guide](USAGE_GUIDE.md) for implementing these practices in your workflow.
 
 ---
 
