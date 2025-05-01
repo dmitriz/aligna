@@ -8,34 +8,94 @@ This guide explains **how** to effectively implement the Aligna AI review guidel
 
 Before you begin, ensure you have the following:
 
-- Supported languages/frameworks: Python 3.8+, Node.js 14+, or equivalent
+- Supported languages/frameworks: Python 3.8-3.10, Node.js 14-16, or equivalent
 - Required tools: Git, a text editor (e.g., VS Code), and a terminal
 - API keys or credentials for any integrated services
+- [Python installation guide](https://www.python.org/downloads/)
+- [Node.js installation guide](https://nodejs.org/en/download/)
 
 ### For AI Agent Teams
 
 1. **Initial Configuration**
-   - Configure AI agents with the [Review Guidelines](REVIEW_GUIDELINES.md)
-   - Specify which aspects are most relevant to your project context
-   - Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
 
-2. **Integration Steps**
-   - Incorporate the [review checklist](templates/review-checklist.md) into your AI agents' review protocol
-   - Verify that the path `templates/review-checklist.md` works in CI and local contexts
-   - Create domain-specific versions of the checklist if needed
-   - Establish baseline metrics for comparison
+- Configure AI agents with the [Review Guidelines](REVIEW_GUIDELINES.md)
+- Specify which aspects are most relevant to your project context
+- Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
+
+1. **Integration Steps**
+
+- Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
+- Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
+- Create domain-specific versions of the checklist if needed
+- Establish baseline metrics for comparison
+
+```bash
+# Validate file existence in CI
+if [ ! -f templates/review-checklist.md ]; then
+  echo "Error: review-checklist.md not found!"
+  exit 1
+fi
+```
 
 ### For Individual AI Agents
 
 1. **As an Author Agent**
-   - Apply the guidelines when generating content for submission
-   - Perform self-review based on the principles before requesting peer review
-   - Include context about areas where specific feedback is needed
 
-2. **As a Reviewer Agent**
-   - Reference the [review checklist](templates/review-checklist.md) during review processes
-   - Complete the checklist systematically during evaluation
-   - Balance thoroughness with efficiency in feedback generation
+- Apply the guidelines when generating content for submission
+- Perform self-review based on the principles before requesting peer review
+- Include context about areas where specific feedback is needed
+
+1. **As a Reviewer Agent**
+
+- Reference the [Review Checklist](templates/review-checklist.md) during review processes
+- Complete the checklist systematically during evaluation
+- Balance thoroughness with efficiency in feedback generation
+
+### Prompt Templates
+
+#### Author Agent
+
+```markdown
+# Author Agent Prompt Template
+
+## Context
+- Describe the purpose of the content or code being generated.
+- Highlight any specific areas where feedback is needed.
+
+## Self-Review Checklist
+- [ ] Have I followed the guidelines?
+- [ ] Is the content clear and well-structured?
+- [ ] Are there any potential edge cases or issues?
+
+## Submission
+- Provide any additional context or notes for the reviewer.
+```
+
+#### Reviewer Agent
+
+```markdown
+# Reviewer Agent Prompt Template
+
+## Initial Assessment
+- [ ] Do I understand the purpose of the submission?
+- [ ] Is the scope appropriate for a single review?
+
+## Technical Review
+- [ ] Is the code or content clear and well-documented?
+- [ ] Are there any potential edge cases or issues?
+- [ ] Is the performance acceptable?
+
+## Communication
+- [ ] Are there any must-fix issues?
+- [ ] Are there any suggestions for improvement?
+- [ ] Is the feedback clear and actionable?
+
+## Final Thoughts
+- Provide an overall impression and key recommendations.
+
+## Audit Trail
+- [ ] Have I logged or exported the checklist results for audit purposes?
+```
 
 ## 💡 Practical Examples
 
@@ -95,7 +155,7 @@ The improved navigation structure makes the docs much more usable.
 
 ## 🔄 Adapting to Your Context
 
-### For Open Source Projects
+### For Open-Source Projects
 
 Focus on clear contribution guidelines and community standards.
 
@@ -105,17 +165,27 @@ Emphasize clarity of methodology and strength of conclusions.
 
 #### For Design Reviews
 
-Adapt to include user experience considerations and design principles.
+Adapt to include user-experience considerations and design principles.
 
 Remember that Aligna is a framework, not a strict rulebook. Adapt these practices to your AI agents' specific review domains and capabilities.
 
 ## 🤔 Common Questions
 
 **Q: How strict should AI agents be with the checklist?**  
-A: The checklist is a guidance tool. Configure agents to prioritize elements most relevant to your quality standards.
+**A:** The checklist is a guidance tool. Configure agents to prioritize elements most relevant to your quality standards.
 
 **Q: How can this integrate with existing AI review systems?**  
-A: Incorporate Aligna principles into your AI agents' prompt engineering or review protocols.
+**A:** Incorporate Aligna principles into your AI agents' prompt engineering or review protocols.
 
 **Q: How should AI agents handle subjective judgments?**  
-A: Program agents to clearly indicate reasoning for subjective assessments and provide evidence-based justifications.
+**A:** Program agents to clearly indicate reasoning for subjective assessments and provide evidence-based justifications.
+
+**Q: How do I customize the checklist?**  
+**A:** You can customize the checklist by modifying the `templates/review-checklist.md` file to include criteria specific to your project or domain.
+
+**Q: How often should metrics be reviewed?**  
+**A:** Metrics should be reviewed regularly, ideally after each review cycle, to ensure continuous improvement and alignment with quality standards.
+
+## 📝 Conclusion
+
+By following these guidelines, your AI agent teams can deliver more consistent, helpful, and effective reviews across various domains.

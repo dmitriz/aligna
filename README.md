@@ -1,6 +1,6 @@
 # 📚 **Aligna AI** — Review Guidelines for AI Agents
 
-> **Aligna is a framework specifically designed for AI agent reviewers** to provide structured, consistent, and helpful feedback on code, documentation, and research content. It offers guidelines, checklists, and metrics to improve the quality of automated reviews while maintaining a focus on actionable feedback and effective communication.
+> **Aligna is a framework specifically designed for AI agent reviewers** to provide structured, consistent, and actionable and constructive feedback on code, documentation, and research content. It offers guidelines, checklists, and metrics to improve the quality of automated reviews while maintaining a focus on actionable feedback and effective communication.
 
 ---
 
@@ -18,6 +18,9 @@
 - Apply the practical [Review Checklist](templates/review-checklist.md) immediately.
 - Measure improvements with our [Metrics Guide](METRICS.md).
 - Implement these practices via our [Usage Guide](USAGE_GUIDE.md).
+- Use the practical examples to guide your team.
+- Measure improvements using the provided metrics.
+- Implement via the Aligna framework.
 
 ---
 
@@ -44,7 +47,7 @@ We address gaps such as:
 - **Compared to tools like Reviewable/Gerrit**: Emphasizes human communication over technical mechanics ([Reviewable](https://reviewable.io/) | [Gerrit](https://www.gerritcodereview.com/))
 - **Versus linting tools (ESLint, etc.)**: Addresses holistic review culture, not just automated checks ([ESLint](https://eslint.org/))
 
-**Current gaps we're addressing that most review systems miss:**
+**Current gaps we’re addressing:**
 
 - Psychological safety in feedback delivery
 - Practical minimalism (avoiding over-engineered processes)
