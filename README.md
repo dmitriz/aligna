@@ -32,4 +32,17 @@
 - [Drop your suggestions or links here](/issues/new?template=feedback-template.md).
 - Even just a quick link is appreciated!
 
+### 🔄 How Aligna Differs From Existing Solutions
+
+- **Unlike GitHub's CODEOWNERS**: Focuses on review quality, not just assignment
+- **Beyond Conventional PR Templates**: Addresses reviewer mindset, not just submission structure
+- **Compared to tools like Reviewable/Gerrit**: Emphasizes human communication over technical mechanics
+- **Versus linting tools (ESLint, etc.)**: Addresses holistic review culture, not just automated checks
+
+Current gaps we're addressing that most review systems miss:
+
+- Psychological safety in feedback delivery
+- Practical minimalism (avoiding over-engineered processes)
+- Cross-domain application (works for code, docs, and research papers)
+
 ---
