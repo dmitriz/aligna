@@ -22,7 +22,7 @@ Before you begin, ensure you have the following:
 - Specify which aspects are most relevant to your project context
 - Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
 
-1. **Integration Steps**
+2. **Integration Steps**
 
 - Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
 - Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
