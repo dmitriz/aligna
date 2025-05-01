@@ -21,7 +21,7 @@ Before you begin, ensure you have the following:
 
 2. **Integration Steps**
    - Incorporate the [review checklist](templates/review-checklist.md) into your AI agents' review protocol
-   - Verify that the path `templates/review-checklist.md` works in CI and local contexts
+   - Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
    - Create domain-specific versions of the checklist if needed
    - Establish baseline metrics for comparison
 
