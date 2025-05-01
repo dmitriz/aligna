@@ -1,8 +1,11 @@
-# 📚 Review Guidelines
+# 📚 Aligna AI Review Guidelines for AI Agents
 
 - Thank you for taking the time to contribute or review — your insights are truly appreciated!
 - These guidelines aim to make reviews smooth, enjoyable, and focused on high-quality contributions.
 - Feel free to follow them as much as you find helpful.
+
+> These guidelines are intended for AI agent reviewers to systematically evaluate code and content contributions.
+> **Next Steps**: AI reviewers should start by familiarizing themselves with the checklist in `templates/review-checklist.md` and reviewing the metrics outlined in `METRICS.md` to understand evaluation criteria.
 
 ---
 
