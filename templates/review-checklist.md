@@ -1,4 +1,4 @@
-# Aligna Review Checklist
+# Aligna AI Review Checklist for AI Agents
 
 > Copy this template into your review comments for a structured approach.
 
