@@ -14,13 +14,13 @@ Before you begin, ensure you have the following:
 
 ### For AI Agent Teams
 
-1. **Initial Configuration**
+ 1. **Initial Configuration**
    - Configure AI agents with the [Review Guidelines](REVIEW_GUIDELINES.md)
    - Specify which aspects are most relevant to your project context
    - Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
 
-2. **Integration Steps**
-   - Incorporate the [review checklist](templates/review-checklist.md) into your AI agents' review protocol
+ 2. **Integration Steps**
+   - Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
    - Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
    - Create domain-specific versions of the checklist if needed
    - Establish baseline metrics for comparison
