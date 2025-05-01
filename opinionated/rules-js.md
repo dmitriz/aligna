@@ -4,7 +4,7 @@ This document outlines best practices for repository organization, script struct
 
 ## 📁 Folder Structure
 
-- Use `scripts/` for all one-off or maintenance scripts (e.g., setup, cleanup).
+- Use `scripts/` for all maintenance scripts (e.g., setup, cleanup).
 - Use `src/` for reusable, testable code modules.
 - Use `.secrets/` for configuration files containing sensitive data.
 
@@ -25,7 +25,8 @@ This document outlines best practices for repository organization, script struct
 ## 🧪 Testing
 
 - Use **Jest** for unit and integration tests.
-- Keep tests colocated in a `__tests__/` subfolder or mirror structure inside `tests/`.
+- Keep tests next to the code they test (e.g., `src/__tests__/`).
+- Avoid `describe` and use only `it` blocks to simplify tests structure.
 - Write pure functions whenever possible to simplify testing.
 
 ## 📦 Dependency Management
@@ -46,7 +47,10 @@ This document outlines best practices for repository organization, script struct
   - Dependencies
   - Configuration file (e.g., `config.js`)
 - Use `UPPER_SNAKE_CASE` for constants.
-- Adopt CommonJS (`require`, `module.exports`) throughout.
+- Adopt CommonJS (`require`, `module.exports`) throughout to avoid complexity and build issues.
+- Use `async/await` for asynchronous code to improve readability.
+- Use `console.error` for error messages and `console.log` for general output.
+- Avoid using `console.log` for debugging; use a proper logger if needed.
 - Prefer pure functions and isolate I/O logic.
 
 ## 🛡️ Security Practices
@@ -73,6 +77,7 @@ This document outlines best practices for repository organization, script struct
 
 - Include:
   - `.secrets/`
+  - `secrets/`
   - `node_modules/`
   - `logs/`, `*.log`
   - `.env`, `.DS_Store`
