@@ -12,10 +12,10 @@
 
 ## ❓ Curious?
 
-- Check our [Review Guidelines](REVIEW_GUIDELINES.md).
-- See our practical [Review Checklist](templates/review-checklist.md) for immediate use.
-- Learn how to [Measure Improvements](METRICS.md) from using these guidelines.
-- Follow our [Usage Guide](USAGE_GUIDE.md) for implementing these practices in your workflow.
+- Use our [Review Guidelines](REVIEW_GUIDELINES.md).
+- Apply the practical [Review Checklist](templates/review-checklist.md) immediately.
+- Measure improvements with our [Metrics Guide](METRICS.md).
+- Implement these practices via our [Usage Guide](USAGE_GUIDE.md).
 
 ---
 
@@ -35,12 +35,14 @@
 
 ### 🔄 How Aligna Differs From Existing Solutions
 
+We address gaps such as:
+
 - **Unlike GitHub's CODEOWNERS**: Focuses on review quality, not just assignment ([Learn more about CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners))
 - **Beyond Conventional PR Templates**: Addresses reviewer mindset, not just submission structure ([Explore PR templates](https://docs.github.com/en/github/building-a-strong-community/using-templates-to-encourage-useful-issues-and-pull-requests))
 - **Compared to tools like Reviewable/Gerrit**: Emphasizes human communication over technical mechanics ([Reviewable](https://reviewable.io/) | [Gerrit](https://www.gerritcodereview.com/))
 - **Versus linting tools (ESLint, etc.)**: Addresses holistic review culture, not just automated checks ([ESLint](https://eslint.org/))
 
-Current gaps we're addressing that most review systems miss:
+**Current gaps we're addressing that most review systems miss:**
 
 - Psychological safety in feedback delivery
 - Practical minimalism (avoiding over-engineered processes)
