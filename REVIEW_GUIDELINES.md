@@ -5,6 +5,7 @@
 - Feel free to follow them as much as you find helpful.
 
 > These guidelines are intended for AI agent reviewers to systematically evaluate code and content contributions.
+> **Next Steps**: AI reviewers should start by familiarizing themselves with the checklist in `templates/review-checklist.md` and reviewing the metrics outlined in `METRICS.md` to understand evaluation criteria.
 
 ---
 

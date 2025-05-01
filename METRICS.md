@@ -2,7 +2,9 @@
 
 ## Why Measure?
 
-Measuring helps us understand if our review guidelines are actually improving the review process when implemented by AI agents. Without measurement, we're operating on assumptions rather than evidence.
+Measuring helps us understand if our review guidelines are actually improving the review process when implemented by AI agents. Without measurement, we're operating on assumptions rather than evidence. Align these metrics with your organizational goals or specific review KPIs to ensure they are meaningful.
+
+After adopting Aligna, one team saw a 30% reduction in review iterations.
 
 ## Metrics to Track for AI Reviews
 
@@ -16,9 +18,9 @@ Track these metrics before and after implementing Aligna in your AI review syste
 
 2. **Iteration Reduction**
    - Average number of review cycles before acceptance (measured in cycles)
-   - Fewer iterations suggest clearer initial feedback generation
+   - Fewer iterations suggest clearer initial feedback
 
-3. **Feedback Quality Ratio**
+3. **Feedback Precision Ratio**
    - Ratio of clarifying questions to actionable feedback (measured as a percentage)
    - Lower ratio indicates more precise understanding by AI agents
 
@@ -28,7 +30,7 @@ Track these metrics before and after implementing Aligna in your AI review syste
 
 ### Qualitative Metrics
 
-Periodically evaluate through automated scoring:
+Periodically evaluate through automated scoring performed by designated tools or personnel:
 
 1. **Feedback Clarity Score**
    - How clearly the AI agent expressed its reasoning (scored on a scale of 1–5)
@@ -41,6 +43,9 @@ Periodically evaluate through automated scoring:
 3. **Consistency Index**
    - How consistently the AI applies standards across different submissions (scored on a scale of 1–5)
    - Measures reliability of the review process
+   - Link to an example of a dashboard or reporting tool for tracking consistency scores.
+
+Define the scoring scale (e.g., 1–5) and link to example rubrics.
 
 ## Implementation Approach
 
@@ -50,10 +55,10 @@ To implement effective measurement:
 2. Continuously monitor metrics during implementation
 3. Apply automated feedback loops to improve AI review quality
 
-For tooling, consider using telemetry scripts or dashboards like Prometheus/Grafana to facilitate baseline recording and continuous monitoring.
+For tooling, consider using telemetry scripts or dashboards like Prometheus/Grafana to facilitate baseline recording and continuous monitoring. Link to example telemetry scripts or dashboards (e.g., Prometheus/Grafana).
 
 Remember: The goal isn't perfect measurement, but sufficient data to guide improvements in AI review capabilities.
 
 ---
 
-**Note**: This framework is adaptable. Configure metrics collection to match your specific AI agents' capabilities and review domains.
+**Note**: This framework is adaptable. Configure metrics collection to match your specific AI agents' capabilities and review domains. For example, customizing metrics for a mobile app might focus on user experience and performance, while a web service might prioritize uptime and response time.
