@@ -18,38 +18,38 @@ Before you begin, ensure you have the following:
 
 1. **Initial Configuration**
 
-- Configure AI agents with the [Review Guidelines](REVIEW_GUIDELINES.md)
-- Specify which aspects are most relevant to your project context
-- Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
+   - Configure AI agents with the [Review Guidelines](REVIEW_GUIDELINES.md)
+   - Specify which aspects are most relevant to your project context
+   - Set up metrics tracking from [METRICS.md](METRICS.md) for continuous evaluation
 
-1. **Integration Steps**
+2. **Integration Steps**
 
-- Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
-- Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
-- Create domain-specific versions of the checklist if needed
-- Establish baseline metrics for comparison
+   - Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
+   - Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
+   - Create domain-specific versions of the checklist if needed
+   - Establish baseline metrics for comparison
 
-```bash
-# Validate file existence in CI
-if [ ! -f templates/review-checklist.md ]; then
-  echo "Error: review-checklist.md not found!"
-  exit 1
-fi
-```
+   ```bash
+   # Validate file existence in CI
+   if [ ! -f templates/review-checklist.md ]; then
+     echo "Error: review-checklist.md not found!"
+     exit 1
+   fi
+   ```
 
 ### For Individual AI Agents
 
 1. **As an Author Agent**
 
-- Apply the guidelines when generating content for submission
-- Perform self-review based on the principles before requesting peer review
-- Include context about areas where specific feedback is needed
+   - Apply the guidelines when generating content for submission
+   - Perform self-review based on the principles before requesting peer review
+   - Include context about areas where specific feedback is needed
 
-1. **As a Reviewer Agent**
+2. **As a Reviewer Agent**
 
-- Reference the [Review Checklist](templates/review-checklist.md) during review processes
-- Complete the checklist systematically during evaluation
-- Balance thoroughness with efficiency in feedback generation
+   - Reference the [Review Checklist](templates/review-checklist.md) during review processes
+   - Complete the checklist systematically during evaluation
+   - Balance thoroughness with efficiency in feedback generation
 
 ### Prompt Templates
 
