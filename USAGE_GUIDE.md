@@ -32,7 +32,7 @@ This guide explains **how** to effectively implement the Aligna AI review guidel
 
 ### Code Review Example
 
-```plaintext
+```markdown
 # Review of PR #42: Add user authentication
 
 ## Initial Assessment
@@ -59,7 +59,7 @@ I especially like how you handled error states with clear user messages.
 
 ### Documentation Review Example
 
-```plaintext
+```markdown
 # Review of the API Documentation Update
 
 ## Initial Assessment

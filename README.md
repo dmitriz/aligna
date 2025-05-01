@@ -35,10 +35,10 @@
 
 ### 🔄 How Aligna Differs From Existing Solutions
 
-- **Unlike GitHub's CODEOWNERS**: Focuses on review quality, not just assignment
-- **Beyond Conventional PR Templates**: Addresses reviewer mindset, not just submission structure
-- **Compared to tools like Reviewable/Gerrit**: Emphasizes human communication over technical mechanics
-- **Versus linting tools (ESLint, etc.)**: Addresses holistic review culture, not just automated checks
+- **Unlike GitHub's CODEOWNERS**: Focuses on review quality, not just assignment ([Learn more about CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners))
+- **Beyond Conventional PR Templates**: Addresses reviewer mindset, not just submission structure ([Explore PR templates](https://docs.github.com/en/github/building-a-strong-community/using-templates-to-encourage-useful-issues-and-pull-requests))
+- **Compared to tools like Reviewable/Gerrit**: Emphasizes human communication over technical mechanics ([Reviewable](https://reviewable.io/) | [Gerrit](https://www.gerritcodereview.com/))
+- **Versus linting tools (ESLint, etc.)**: Addresses holistic review culture, not just automated checks ([ESLint](https://eslint.org/))
 
 Current gaps we're addressing that most review systems miss:
 
