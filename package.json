@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "> **Aligna is a framework specifically designed for AI agent reviewers** to provide structured, consistent, and actionable and constructive feedback on code, documentation, and research content. It offers guidelines, checklists, and metrics to improve the quality of automated reviews while maintaining a focus on actionable feedback and effective communication.",
   "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "lint:md:fix": "markdownlint \"**/*.md\" --ignore node_modules --fix",
@@ -16,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/dmitriz/aligna.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["AI-reviewer", "documentation", "linting"],
+  "author": "Your Name <you@example.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dmitriz/aligna/issues"
