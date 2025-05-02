@@ -12,6 +12,7 @@ This document outlines best practices for repository organization, script struct
 - Use `config/` for non-sensitive configuration files
 - Use `docs/` for project documentation beyond the README
 - Use `assets/` for static resources (images, fonts, etc.)
+- **Include a top-level `e2e/` directory** for end-to-end tests to improve discoverability for CI and QA workflows.
 
 ### Project Structure Options
 
@@ -195,10 +196,10 @@ it('rejects creation with invalid email', async () => {
 ### Security and Maintenance
 
 - Run `npm audit` regularly to monitor for known vulnerabilities
-- Address reported vulnerabilities by:
-  - Updating or replacing affected packages promptly
-  - Using `npm audit fix` when safe
-  - Manually reviewing changes for critical updates
+  - Address reported vulnerabilities by:
+    - Updating or replacing affected packages promptly
+    - Using `npm audit fix` when safe
+    - Manually reviewing changes for critical updates
 - Optionally define security policies (e.g., disallow high-severity vulnerabilities in CI)
 - Configure automated dependency updates with dependabot or renovate
 - Implement security scanning in your CI pipeline:
@@ -345,4 +346,3 @@ async function process_payment(payment) {
   - `logs/`, `*.log`
   - `.env`, `.DS_Store`
   - `dist/` or `build/`
-  - Lockfiles if intentionally excluded
