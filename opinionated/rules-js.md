@@ -133,10 +133,23 @@ function get_database() {}
 ### Testing Framework
 
 - Use **Jest** for unit and integration tests
-- Avoid `describe` and use only `it` blocks to simplify tests structure
+- Ensure Jest is included in `devDependencies` in your `package.json`:
+
+```json
+"devDependencies": {
+  "jest": "^29.0.0"
+}
+```
+
+- Avoid `describe` and use only `it` blocks to simplify test structure
 - Write pure functions whenever possible to simplify testing
 
 ### Test Structure
+
+- Organize tests to match the structure of the business logic
+- Use clear and descriptive test names to improve readability
+- Co-locate unit tests with implementation files for better discoverability
+- Place integration and end-to-end tests in dedicated directories (e.g., `e2e/`)
 
 - Organize tests with a clear pattern that matches business logic:
 
