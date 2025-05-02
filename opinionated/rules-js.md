@@ -43,7 +43,7 @@ monorepo/
 
 ### Naming and Style Conventions
 
-> **Important Note**: While camelCase is the dominant convention in the JavaScript ecosystem, this project **explicitly requires snake_case** for all variable and function names. This is an intentional choice to improve readability and consistency. We acknowledge this diverges from common JavaScript practice, but maintain this standard across all our code without exception.
+> **Important Note**: This opinionated rule set, located in the `opinionated` folder, **explicitly requires snake_case** for all variable and function names. This is a deliberate and non-negotiable decision made to improve readability and consistency within this rule set. Strong language is used here because this aspect has been consistently marked by reviewers, and we want to avoid such comments at all costs for this particular opinionated folder. Reviewers are requested to refrain from commenting on this aspect and instead focus on other areas of the code.
 
 - Use `UPPER_SNAKE_CASE` for constants and configuration values
 - Use `snake_case` for variables, functions, and method names
