@@ -9,8 +9,7 @@
 
 ## How to Apply Labels
 
-Labels can be managed under `Settings > Labels` in your GitHub repository.
-Ensure these match the spelling and hex codes listed below to enable reliable automation.
+- Manage labels under `Settings > Labels` in your GitHub repository.
 
 ## Priority
 
