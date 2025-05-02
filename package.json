@@ -10,7 +10,7 @@
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "lint:md:fix": "markdownlint \"**/*.md\" --ignore node_modules --fix",
     "lint": "npm run lint:md",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests implemented yet\" && exit 0"
   },
   "repository": {
     "type": "git",

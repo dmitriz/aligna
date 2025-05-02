@@ -59,6 +59,17 @@ function get_user() {}
 function get_database() {}
 ```
 
+- Enforce snake_case using ESLint rules:
+
+```json
+{
+  "rules": {
+    "camelcase": "off",
+    "id-match": ["error", "^[a-z][a-z0-9_]*$"]
+  }
+}
+```
+
 ### Testing Organization
 
 - Co-locate tests with implementation files
@@ -178,7 +189,7 @@ it('rejects creation with invalid email', async () => {
 
 ### Version Control and Locking
 
-- Always commit lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installs across environments
+- Always commit lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installations across environments
 - Run `npm audit` regularly to monitor for known vulnerabilities
 
 ### Security and Maintenance
