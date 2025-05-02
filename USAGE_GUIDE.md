@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
    - Incorporate the [Review Checklist](templates/review-checklist.md) into your AI agents' review protocol
    - Verify that the checklist file can be accessed correctly in both CI and local environments (path may need adjustment based on your setup)
    - Create domain-specific versions of the checklist if needed
-   - Establish baseline metrics for comparison
+   - To establish baseline metrics for comparison
 
    ```bash
    # Validate file existence in CI
