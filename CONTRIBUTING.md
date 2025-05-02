@@ -14,4 +14,19 @@ Thanks for your interest in improving Aligna! We value simplicity and clarity.
 - **Be clear**: Write in plain language that's easy to understand
 - **Stay focused**: Contributions should align with our core goals
 
+## Documentation Standards
+
+### Markdown Formatting
+
+- Follow the project's markdown linting rules (see `.markdownlint.json`)
+- Include blank lines before and after headings, lists, and code blocks
+- Use language specifiers for code blocks (e.g., ```javascript)
+
+```javascript
+// Example code block
+console.log("Hello, world!");
+```
+
+- Keep line lengths reasonable for readability
+
 We review all contributions promptly and appreciate your help making review processes better for everyone!
