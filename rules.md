@@ -5,8 +5,9 @@ This document outlines best practices for repository organization, script struct
 ## 📁 Folder Structure
 
 - Use `scripts/` for all one-off or maintenance scripts (e.g., setup, cleanup).
-- Use `src/` for reusable, testable code modules.
-- Use `.secrets/` for configuration files containing sensitive data.
+- Place reusable, testable code modules in `src/`.
+- Store configuration files containing sensitive data in `.secrets/`.
+- Add a `docs/` directory for architectural diagrams, API references, and longer-form guides.
 
 ## 🔒 Secrets Management
 
@@ -32,7 +33,7 @@ This document outlines best practices for repository organization, script struct
 
 ## 📦 Dependency Management
 
-- Commit lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installs across environments.
+- Commit lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installations across environments.
 - Run `npm audit` regularly to monitor for known vulnerabilities.
 - Address reported vulnerabilities by:
   - Updating or replacing affected packages promptly.
