@@ -1,0 +1,4 @@
+{
+  "apiKey": "[REQUIRED] Your API key",
+  "clientSecret": "[REQUIRED] Your client secret"
+}
