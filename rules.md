@@ -15,6 +15,7 @@ This document outlines best practices for repository organization, script struct
 - Use JSON format for secrets files (e.g., `.secrets/github.json`).
 - Provide a `.secrets.template.json` file with dummy values in the repository.
 - Prefer secrets files over environment variables to reduce runtime complexity.
+- WARNING: Never commit secrets to Git history. Consider using a dedicated secrets manager service (AWS Secrets Manager, HashiCorp Vault) for production environments.
 
 ## ⚙️ Configuration
 
