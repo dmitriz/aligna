@@ -8,13 +8,14 @@ This document outlines best practices for repository organization, script struct
 - Use `src/` for reusable, testable code modules.
 - Use `.secrets/` for configuration files containing sensitive data.
 
-## 🔐 Secrets Management
+## 🔒 Secrets Management
 
 - Secrets should be placed in the `.secrets/` directory.
 - The directory must be included in `.gitignore`.
 - Use JSON format for secrets files (e.g., `.secrets/github.json`).
 - Provide a `.secrets.template.json` file with dummy values in the repository.
-- Prefer secrets files over environment variables to reduce runtime complexity.
+- Prefer secrets files for local development to reduce runtime complexity.
+- For production environments, use environment variables for runtime secrets as they integrate well with containerized environments and CI/CD systems.
 - WARNING: Never commit secrets to Git history. Consider using a dedicated secrets manager service (AWS Secrets Manager, HashiCorp Vault) for production environments.
 
 ## ⚙️ Configuration
