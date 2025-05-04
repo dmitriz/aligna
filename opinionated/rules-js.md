@@ -59,19 +59,11 @@ The following decisions have been **carefully considered** and are **not open fo
 ### Naming Conventions
 
 - Use `kebab-case` for directory and file names
-- Use consistent file suffixes: `*.test.js`, `*.util.js`
+- Use consistent file suffixes: `*.test.js`, `*.spec.js`
 - Limit directory nesting to 3 levels maximum
 - Use `UPPER_SNAKE_CASE` for constants and configuration values
 - Use `snake_case` for variables, functions, and method names
-- Follow verb-based naming patterns for similar operations:
-
-  ```javascript
-  // Resource creation functions start with "create_"
-  function create_user() {}
-  
-  // Resource retrieval functions start with "get_"
-  function get_user() {}
-  ```
+- Follow verb-based naming patterns for similar operations (e.g., functions that create resources should start with "create_", retrieval functions with "get_")
 
 ## 🔐 Secrets & Configuration Management
 
