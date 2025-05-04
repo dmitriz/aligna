@@ -30,7 +30,7 @@ This ruleset prioritizes:
 3. **Minimal, resilient approaches** over complex tooling
 4. **Evidence-based decisions** over trendy approaches
 
-## 🚨 Deliberately Established Conventions (Non-Negotiable)
+## 🚨 Deliberately Established Conventions (Non-Negotiable for the AI assistants using this guide)
 
 The following decisions have been **carefully considered** and are **not open for debate**:
 
