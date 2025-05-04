@@ -575,6 +575,63 @@ For output directed to human users, tests should validate:
 
 This cycle should be repeated for each logical component or feature in the project, leading to well-planned, thoroughly documented, and properly tested code.
 
+## 🔄 Functional Programming Approach
+
+> **AI Assistant Guidance**: When advising on code organization patterns, prioritize functional programming approaches using arrow functions over class-based or object-oriented patterns. This is a deliberate architectural choice.
+
+### Arrow Functions as the Preferred Syntax
+
+We strongly prefer arrow functions (`=>`) over traditional function declarations or expressions for several key reasons:
+
+- **Elegance and Readability**: Arrow functions offer a cleaner, more concise syntax
+- **Clear Input/Output Flow**: The arrow visually represents the transformation from input to output
+- **Implicit Returns**: Single-expression arrows automatically return results without extra syntax
+- **Easier Testing**: Pure arrow functions are inherently more testable than methods tied to classes
+- **Function Composition**: Arrow functions naturally support functional composition patterns
+
+### Function Composition over Classes
+
+We deliberately prefer function composition over class-based organization:
+
+- **Avoid classes** for code organization - use function composition instead
+- **Prefer pure functions** that can be tested in isolation
+- **Use single-object parameters** for flexible function interfaces
+- **Return single-object results** for consistency and extensibility
+- **Chain functions** rather than creating complex class hierarchies
+
+### Examples of Preferred Function Style
+
+```javascript
+// Preferred: Arrow function with object parameters and returns
+const get_user = (query) => {
+  // Implementation
+  return { id, name, settings };
+};
+
+// Preferred: Promise-returning arrow function
+const fetch_user_data = ({ user_id }) => {
+  return fetch(`/api/users/${user_id}`)
+    .then(response => response.json());
+};
+
+// Preferred: Curried functions for flexible partial application
+const filter_items = (predicate) => (items) => 
+  items.filter(predicate);
+
+const active_items = filter_items(item => item.status === 'active');
+```
+
+### Avoiding Object-Oriented Patterns
+
+Instead of classes with methods and internal state, we prefer organizing related functionality through:
+
+- **Function modules**: Groups of related pure functions exported from a single file
+- **Higher-order functions**: Functions that take or return other functions
+- **Composition utilities**: Simple utilities that combine functions together
+- **Stateless helpers**: Pure utility functions that transform data without side effects
+
+This approach produces code that is more predictable, testable, and easier to reason about than object-oriented alternatives.
+
 ## 📖 Additional Resources and References
 
 > **AI Assistant Guidance**: When providing additional resources, refer to these repository documents for supplementary guidance on review practices, metrics, and workflows.
