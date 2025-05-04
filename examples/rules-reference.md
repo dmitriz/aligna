@@ -1,83 +1,77 @@
-# 🧭 Project Guidelines
+# 🧭 Project Guidelines Template
 
-This document outlines best practices for repository organization, script structure, configuration, and secure development workflows.
+This document outlines best practices for repository organization, project structure, configuration, and secure development workflows.
 
 ## 📁 Folder Structure
 
-- Use `scripts/` for all one-off or maintenance scripts (e.g., setup, cleanup).
-- Place reusable, testable code modules in `src/`.
-- Store configuration files containing sensitive data in `.secrets/`.
-- Add a `docs/` directory for architectural diagrams, API references, and longer-form guides.
+- Use `scripts/` for automation scripts (setup, cleanup, deployment).
+- Place reusable, testable code modules in a source directory (e.g., `src/`, `lib/`).
+- Store configuration files containing sensitive data in a secure, non-committed directory.
+- Add a `docs/` directory for architectural diagrams, API references, and guides.
 
 ## 🔒 Secrets Management
 
-- Secrets should be placed in the `.secrets/` directory.
-- The directory must be included in `.gitignore`.
-- Use JSON format for secrets files (e.g., `.secrets/github.json`).
-- Provide a `.secrets.template.json` file with dummy values in the repository.
-- Prefer secrets files for local development to reduce runtime complexity.
-- For production environments, use environment variables for runtime secrets as they integrate well with containerized environments and CI/CD systems.
-- WARNING: Never commit secrets to Git history. Consider using a dedicated secrets manager service (AWS Secrets Manager, HashiCorp Vault) for production environments.
+- Store secrets in a dedicated directory that is **never committed to source control**.
+- Include this directory in your version control ignore files.
+- Provide template files with dummy values as a reference for required fields.
+- Prefer secrets files for local development to reduce complexity.
+- For production environments, use environment variables for runtime secrets.
+- WARNING: Never commit secrets to version control history. Consider using a dedicated secrets manager service for production environments.
 
 ## ⚙️ Configuration
 
-- Use `.js` files (e.g., `config.js`) for dynamic configuration where flexibility is needed.
-- Consider `.yaml`/`.yml` for declarative configuration when preferred by tools or community.
-- Export all config constants using `module.exports`.
+- Use appropriate configuration files based on your language ecosystem.
+- Consider structured formats like YAML or JSON for declarative configuration.
+- Layer configuration by environment (development, test, production).
 
 ## 🧪 Testing
 
-- Use **Jest** for unit and integration tests.
-- Keep tests colocated in a `__tests__/` subfolder or mirror structure inside `tests/`.
+- Use appropriate testing frameworks for your project.
+- Keep tests organized either alongside implementation or in a dedicated test directory.
 - Write pure functions whenever possible to simplify testing.
 
 ## 📦 Dependency Management
 
-- Commit lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installations across environments.
-- Run `npm audit` regularly to monitor for known vulnerabilities.
-- Address reported vulnerabilities by:
-  - Updating or replacing affected packages promptly.
-  - Using `npm audit fix` when safe.
-  - Manually reviewing changes for critical updates.
-- Optionally define security policies (e.g., disallow high-severity vulnerabilities in CI).
+- Commit lockfiles to ensure consistent installations across environments.
+- Regularly audit dependencies for security vulnerabilities.
+- Address reported vulnerabilities promptly.
+- Consider implementing security scanning in your CI pipeline.
 
-## 🧾 Script Conventions
+## 🧾 Code Conventions
 
-- All scripts should begin with a structured comment header explaining:
+- All code modules should include appropriate documentation:
   - Purpose
-  - Usage instructions
+  - Usage instructions 
   - Dependencies
-  - Configuration file (e.g., `config.js`)
-- Use `UPPER_SNAKE_CASE` for constants.
-- Adopt CommonJS (`require`, `module.exports`) throughout.
-- Prefer pure functions and isolate I/O logic.
+- Use consistent naming conventions for constants, variables, and functions.
+- Prefer pure functions and isolate I/O logic where possible.
 
 ## 🛡️ Security Practices
 
-- Never commit actual secrets. Use `.secrets.template.json` with placeholders instead.
-- Avoid shell script arguments unless strictly necessary—prefer configuration files.
-- Avoid unnecessary environment variables to prevent leakage via process environments.
-- Consider wrapping scripts with permission checks (e.g., read/write assertions).
+- Never commit actual secrets. Use template files with placeholders instead.
+- Avoid command-line arguments for sensitive values—prefer configuration files.
+- Avoid unnecessary environment variables to prevent leakage.
+- Consider implementing appropriate permission checks.
 
 ## 📚 Documentation
 
 - Include a `README.md` at the project root with setup and usage instructions.
-- Document new scripts inline and in the README if used externally.
-- Link to GitHub issues or external references when applicable.
+- Document important components and functionalities.
+- Link to external references when applicable.
 
-## 🗂 Git & Collaboration
+## 🗂 Version Control & Collaboration
 
-- Use feature branches with a `feature/` or `fix/` prefix.
-- Follow commit message conventions (e.g., `feat:`, `fix:`, `docs:`).
-- Keep PRs focused and small.
-- Always review `.gitignore` for sensitive paths.
+- Use feature branches with a clear naming convention.
+- Follow consistent commit message conventions.
+- Keep pull requests focused and small.
+- Always review ignore files for sensitive paths.
 
-## 🚫 .gitignore Guidelines
+## 🚫 Version Control Ignore Guidelines
 
-- Include:
-  - `.secrets/`
-  - `node_modules/`
-  - `logs/`, `*.log`
-  - `.env`, `.DS_Store`
-  - `dist/` or `build/`
-  - Lockfiles if intentionally excluded
+Include appropriate patterns for:
+  - Secret directories
+  - Dependency directories
+  - Log files
+  - Environment files
+  - Build artifacts and caches
+  - Editor-specific files
