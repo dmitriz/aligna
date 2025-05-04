@@ -27,12 +27,12 @@ Standardizing labels in your GitHub repository helps streamline issue tracking a
 | Label             | Color     | Purpose                                  |
 |------------------|-----------|------------------------------------------|
 | `type/action`     | `#0366d6` | Concrete task requiring follow-up        |
-| `type/concept`    | `#0e8a16` | Definition, insight, or system component |
-
-## Status
-
 | Label                 | Color     | Purpose                                              |
-|----------------------|-----------|------------------------------------------------------|
+|------------------------|-----------|------------------------------------------------------|
+| `status/untriaged`     | `#586069` | Not yet processed or classified                      |
+| `status/today`         | `#5319e7` | Planned or being worked on today                     |
+| `status/done`          | `#a2eeef` | Action complete                                      |
+| `status/needs-input`   | `#b60205` | Blocked until further info or feedback is provided   |
 | `status/untriaged`   | `#586069` | Not yet processed or classified                     |
 | `status/today`       | `#5319e7` | Planned or being worked on today                    |
 | `status/done`        | `#a2eeef` | Action complete                                      |
