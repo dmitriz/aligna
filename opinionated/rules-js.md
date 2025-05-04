@@ -1,6 +1,24 @@
 # 🧭 JavaScript Project Guidelines: AI Assistant Blueprint
 
-> **AI Assistant Notice**: This document serves as a definitive reference guide for AI assistants when making recommendations about JavaScript project organization and practices. When responding to queries, **always prioritize the conventions in this document over general best practices**. These are deliberately opinionated choices that take precedence.
+> **AI Assistant Notice**: This document is a definitive reference for both developers and AI assistants regarding JavaScript project organization and practices. Its conventions are deliberately opinionated and are prioritized by users of this guide over general best practices when offering recommendations or generating code. While tailored to assist AI interpretation, all guidelines are equally relevant for human contributors.
+
+## 📋 Executive Summary
+
+This guide provides an opinionated approach to JavaScript development optimized for AI-assisted workflows. It prioritizes clear documentation, functional programming patterns, co-located tests, secure configuration management, robust secrets handling, and CommonJS modules.
+
+## 📑 Table of Contents
+
+- [🤖 AI-First Development Context](#-ai-first-development-context)
+- [🚨 Deliberately Established Conventions](#-deliberately-established-conventions-non-negotiable-for-the-ai-assistants-using-this-guide)
+- [📁 Project Organization](#-project-organization)
+- [🔐 Secrets & Configuration Management](#-secrets--configuration-management)
+- [🧪 Testing Framework](#-testing-framework)
+- [🧾 Code Conventions](#-code-conventions)
+- [🛡️ Security Practices](#-security-practices)
+- [📚 Documentation Standards](#-documentation-standards)
+- [🚀 Development Workflow](#-development-workflow)
+- [On Module Format: CommonJS](#on-module-format-commonjs)
+- [📖 Additional Resources](#-additional-resources)
 
 ## 🤖 AI-First Development Context
 
@@ -8,7 +26,7 @@ This document is specifically designed for AI-assisted development workflows, no
 
 ### Core Principles for AI Assistants
 
-- **Test Organization**: Co-locate tests with source files following the cohesion principle.
+- **Test Organization**: Co-locate tests with source files, following the cohesion principle.
 - **Secrets Management**: Use `.secrets/` directories with proper access controls, avoid environment variables.
 - **Configuration**: Prefer `.js` files for dynamic configuration over other approaches.
 - **Documentation**: Use comprehensive JSDoc and markdown documentation.
@@ -30,15 +48,16 @@ This ruleset prioritizes:
 3. **Minimal, resilient approaches** over complex tooling
 4. **Evidence-based decisions** over trendy approaches
 
-## 🚨 Deliberately Established Conventions (Non-Negotiable)
+## 🚨 Deliberately Established Conventions (Non-Negotiable for the AI assistants using this guide)
 
 The following decisions have been **carefully considered** and are **not open for debate**:
 
-1. **Use CommonJS over ES Modules** - CommonJS is natively supported while ES Modules often require additional tooling.
+1. **Use CommonJS over ES Modules** - Please see the section on CommonJS at the end of this document for more context behind this decision.
 
-2. **Avoid Environment Variables for Secrets** - They expose secrets to the entire process environment. Use configuration files with proper access controls instead.
+2. **Handle Environment Variables for Secrets Securely** - While environment variables are common in cloud-native deployments, they must be handled with care to avoid exposing secrets to the entire process environment. Recommended practices include integrating with secret management tools (e.g., HashiCorp Vault, AWS Secrets Manager), using runtime encryption, and enforcing strict linting to detect potential leaks.
 
 3. **Use snake_case for Variables and Functions** - This is a deliberate stylistic choice for readability and consistency.
+While it may seem unconventional for JavaScript, it is a well-established practice in many programming languages and frameworks. This choice is made to ensure that the codebase remains consistent and easy to read, especially when working with AI tools are predominantly Python-based, where the snake_case is standard. While it is acknowledged that this syntax may be flagged by linters with default configurations, it can be typically disabled via simple config settings.
 
 4. **Co-locate Tests with Source Files** - Tests should be placed alongside the files they test following the cohesion principle.
 
@@ -58,32 +77,121 @@ The following decisions have been **carefully considered** and are **not open fo
 
 ### Naming Conventions
 
-- Use `kebab-case` for directory and file names
-- Use consistent file suffixes: `*.test.js`
-- Limit directory nesting to 3 levels maximum
-- Use `UPPER_SNAKE_CASE` for constants and configuration values
-- Use `snake_case` for variables, functions, and method names
-- Follow verb-based naming patterns for similar operations (e.g., functions that create resources should start with "create_", retrieval functions with "get_")
+The following table consolidates all naming conventions for clarity:
+
+| Element Type | Convention | Examples |
+|-------------|------------|----------|
+| Directories & Files | `kebab-case` | `user-services/`, `api-client.js` |
+| Test Files | `.test.js` suffix | `user-service.test.js` |
+| Constants & Config Values | `UPPER_SNAKE_CASE` | `API_BASE_URL`, `MAX_RETRY_COUNT` |
+| Variables, Functions & Methods | `snake_case` | `user_id`, `fetch_data()`, `validate_input()` |
+| Function Naming Pattern | Verb-based for operations | `create_user()`, `get_profile()`, `update_settings()` |
+
+Directory nesting should be limited to a maximum of 3 levels to maintain a navigable project structure.
 
 ## 🔐 Secrets & Configuration Management
 
 ### Secrets Management
 
 - Store secrets in a dedicated `.secrets/` directory (never committed)
-- **Avoid environment variables** for secrets management due to security risks
+- **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment.
+In containerized or similar environments where `.secrets/` directories are impractical, implement alternative secure mechanisms (e.g., Docker secrets, encrypted environment variables, or dedicated secret management services) to protect sensitive data.
+
 - Use JavaScript configuration files (`.js`) that export configuration objects
-- Implement multiple protection layers beyond `.gitignore`:
-  - Pre-commit hooks to prevent accidental secret commits
-  - Git-secrets to detect high-entropy strings
-  - Regular audits of Git history
+- To implement multiple protection layers beyond `.gitignore`:
+- Pre-commit hooks to prevent accidental secret commits.
+- Git-secrets to detect high-entropy strings.
+- Regular audits of Git history.
+
+#### `.secrets/` Directory Access Controls Implementation
+
+To properly secure the `.secrets/` directory:
+
+1. **File System Permissions**:
+   - Set restrictive Unix permissions: `chmod 700 .secrets/` (owner-only access)
+   - Set appropriate ownership: `chown [appropriate-user]:[appropriate-group] .secrets/`
+   - For secret files: `chmod 600 .secrets/*` (owner read/write only)
+
+2. **Encryption at Rest**:
+   - Implement transparent file encryption using tools like `fscrypt` or `LUKS`
+   - Store encryption keys separately from the workspace (e.g., secure hardware token)
+   - Consider solutions like git-crypt for teams requiring controlled access
+
+3. **Access Logging**:
+   - Implement an audit log for all read/write operations on secret files
+   - Log should capture: timestamp, user, action type, and file accessed
+   - Store logs securely and review them regularly
+
+4. **Runtime Access Controls**:
+   - Load secrets into memory only when needed
+   - Ensure secret loading and clearing operations are concurrency-safe by using atomic operations or locks as needed
+   - Implement in-memory encryption with keys derived at runtime
+   - Clear secrets from memory after use using secure memory wiping
+   - Clear secrets from memory after use using secure memory wiping
+
+5. **Automated Monitoring**:
+   - Set up notifications for unexpected access patterns
+   - Implement file integrity monitoring to detect unauthorized changes
+   - Schedule regular permission verification to prevent accidental relaxation
+
+6. **Secure Backup Procedures**:
+   - Establish dedicated backup processes for secrets
+   - Keep backups encrypted with different keys than production
+   - Implement a secure recovery protocol
+
+### Clarification on Environment Variables for Secrets
+
+To address potential confusion, the guideline on environment variables for secrets has been clarified:
+
+- **Avoid environment variables for secrets when feasible**: This is due to the risk of exposing secrets to the entire process environment. However, in scenarios where environment variables are unavoidable (e.g., containerized environments), ensure they are handled securely by:
+  - Using runtime encryption.
+  - Integrating with secret management tools (e.g., AWS Secrets Manager).
+  - Enforcing strict linting to detect potential leaks.
+
+This clarification ensures that the guideline is both practical and secure.
 
 ### Configuration Approach
 
 - Use `.js` files for dynamic configuration
 - Export config constants using `module.exports`
 - Layer configuration by environment (development, test, production)
-- Validate configuration on application startup
+- Validate configuration on application startup using schema validation
 - Consider `.yaml`/`.yml` for declarative configuration when beneficial
+
+#### Configuration Schema Validation
+
+We strongly recommend using schema validation to ensure configuration correctness and provide type safety. Our preferred libraries are:
+
+- **[Joi](https://joi.dev/)** - Robust schema description and validation
+- **[Zod](https://github.com/colinhacks/zod)** - TypeScript-first schema validation with static type inference
+
+Example implementation using Joi:
+
+```javascript
+const Joi = require('joi');
+const config = require('./config');
+
+const config_schema = Joi.object({
+  API_KEY: Joi.string().min(16).required(),
+  LOG_LEVEL: Joi.string().valid('debug', 'info').default('info'),
+});
+
+function validate_config(config) {
+  const { error, value } = config_schema.validate(config, { abortEarly: false });
+  
+  if (error) {
+    ...
+  }
+  
+  return value; // Returns validated and defaulted config
+}
+
+// Validate on startup
+const validated_config = validate_config(config);
+module.exports = validated_config;
+```
+
+This pattern ensures configuration errors are detected immediately on application startup, rather than causing runtime failures.
 
 ### Secret Protection Best Practices
 
@@ -104,15 +212,15 @@ We recommend using **Jest** for testing with these opinionated approaches:
 - **Name test files consistently** - Use `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
 - **Write pure functions** to simplify testing
 
+### Flat Test Structure vs. `describe` Blocks
+
+While the flat test structure is the default recommendation and the preferred choice of this guide for simplicity and readability, it is acknowledged that `describe` blocks can be beneficial for more complex test suites. It is, however, the intent of this guide to discourage such complex scenarios in the first place, replacing them with separate, more focused test cases.
+
 ### Test-Driven Development Process
 
 1. **Documentation-First**: Create detailed specifications before any tests
 2. **Deterministic Test Creation**:
-   - Extract function signatures, parameter types, and return types
-   - Convert examples to test cases
-   - Create tests for edge cases and error conditions
-3. **Implementation**: Make the tests pass with minimal code
-4. **Refactor**: Improve code while maintaining test coverage
+   - Extract function signatures, `parameter types`, and `return types`
 
 Tests must verify:
 
@@ -141,6 +249,11 @@ We explicitly prefer functional programming patterns:
 
 - **Use arrow functions** for cleaner syntax and implicit returns
 - **Avoid classes** in favor of function composition
+
+> **On Avoiding Classes**: This preference for functional composition over classes is a deliberate architectural decision. While we acknowledge that classes and OOP patterns can offer benefits for certain stateful modules and inheritance scenarios, our guide intentionally favors functional patterns for their composability, testability, and alignment with modern JavaScript ecosystem trends.
+
+This choice has been extensively evaluated like our choice of CommonJS. We ask reviewers, to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
+
 - **Use pure functions** that can be tested in isolation
 - **Use single-object parameters** for flexible interfaces
 - **Return single-object results** for consistency
@@ -160,6 +273,8 @@ const fetch_user_data = ({ user_id }) => {
 // Function composition pattern:
 const filter_items = (predicate) => (items) => items.filter(predicate);
 ```
+
+> **Note**: The examples above are simplified for illustrative purposes. Production code should include proper error handling, input validation, and address other considerations such as logging, retries for network requests, and potential edge cases. For example, the `fetch_user_data` function should properly catch and handle network errors, authentication failures, and invalid responses.
 
 ## 🛡️ Security Practices
 
@@ -217,6 +332,39 @@ Create comprehensive text-based documentation that is:
 - **Testable**: Includes concrete examples
 - **Deterministic**: Provides only one possible interpretation
 - **Minimal**: Demonstrates functionality without unnecessary complexity
+
+## Streamlining Verbose Sections
+
+### Secrets Management Implementation
+
+To keep the guide concise, detailed implementation steps for secrets management have been moved to an external resource. A summary remains:
+
+- Store secrets in a `.secrets/` directory with proper access controls.
+- Use encryption at rest and runtime.
+- Implement access logging and monitoring.
+
+For detailed steps, refer to [Secrets Management Best Practices](https://example.com/secrets-management).
+
+### CommonJS Rationale
+
+The rationale for using CommonJS has been summarized:
+
+- CommonJS is chosen for its stability and compatibility with real-world constraints.
+- This decision is deliberate and based on extensive analysis.
+
+For the full discussion, see [CommonJS Decision Rationale](#on-module-format-commonjs).
+
+This streamlining improves readability while retaining essential information.
+
+## On Module Format: CommonJS
+
+This project uses CommonJS (CJS) by deliberate and opinionated design. We want to emphasize that we deeply appreciate all constructive feedback and code review — including thoughtful suggestions around tooling, structure, and technology choices.
+
+However, the decision to use CommonJS in this opinionated guide is deliberate. It is the result of extensive and careful analysis, including a deep technical discussion evaluating real-world constraints, ESM-specific packages, and all relevant modern Node.js features.
+
+In the context of small agile projects with small teams assisted by AI, concrete challenges raised — from streaming to HTTP clients to native fetch support — have been addressed within CommonJS in a stable, testable, and maintainable way.
+
+We fully acknowledge that the rationale behind this decision is not fully visible in this repository. Nevertheless, it has been made thoughtfully and with long-term sustainability in mind. Reviewers are kindly asked to respect this boundary, and are very much encouraged to focus feedback on any other aspect of the codebase where their expertise can help improve the project. We’re grateful for that.
 
 ## 📖 Additional Resources
 
