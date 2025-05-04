@@ -183,18 +183,15 @@ We recommend:
 
 ### File Format and Templates
 
-- Use JSON format for secrets files (e.g., `.secrets/github.json`)
-- Provide a `.secrets.template.json` file that includes:
+- Use JavaScript files for configuration (preferred format for our own configs)
+- Provide a `.secrets.template.js` file with clear documentation:
 
-```json
-{
-  "apiKey": "[REQUIRED] Your API key from the developer portal",
-  "clientSecret": "[REQUIRED] 64-character client secret",
-  "webhook": {
-    "token": "[OPTIONAL] Webhook verification token",
-    "url": "[REQUIRED] https://your-webhook-endpoint.com"
-  }
-}
+```javascript
+// Example of a simple secrets configuration file
+module.exports = {
+  API_KEY: "[REQUIRED] Access key",
+  SERVICE_URL: "[REQUIRED] Service endpoint"
+};
 ```
 
 ### Environment Integration
@@ -244,14 +241,6 @@ We recommend:
 
 We recommend using **Jest** for unit and integration tests:
 
-- Include Jest in `devDependencies` in your `package.json`:
-
-```json
-"devDependencies": {
-  "jest": "^29.0.0"
-}
-```
-
 - Unlike common Jest patterns, we recommend avoiding `describe` blocks and using only `it` blocks to simplify test structure. This is an intentional departure from typical Jest usage.
 - Write pure functions whenever possible to simplify testing
 
@@ -269,10 +258,6 @@ We recommend using **Jest** for unit and integration tests:
 const user_service = require('./user_service');
 
 it('creates a user with valid data', async () => {
-  // Setup, action, assertions
-});
-
-it('rejects creation with invalid email', async () => {
   // Setup, action, assertions
 });
 ```
@@ -313,7 +298,7 @@ Tests must verify:
 For robust validation, implement tests at multiple levels:
 
 - **Unit Tests**: Verify isolated components behave as documented
-- **Contract Tests**: Validate input/output contracts match documentation
+- **Contract Tests****: Validate input/output contracts match documentation
 - **Integration Tests**: Verify components work together (e.g., API calls to external systems)
 - **End-to-End Tests**: Validate complete workflows function properly
 
@@ -349,30 +334,8 @@ We recommend:
     - Manually reviewing changes for critical updates
 - Optionally define security policies (e.g., disallow high-severity vulnerabilities in CI)
 - Configure automated dependency updates with dependabot or renovate
-- Implement security scanning in your CI pipeline:
-
-```yaml
-# In .github/workflows/security.yml
-jobs:
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm audit --audit-level=moderate
-```
-
+- Implement security scanning in your CI pipeline
 - Enforce security policies via a `.npmrc` file
-
-### Dependency Selection Criteria
-
-- Evaluate all third-party dependencies against these criteria:
-  1. **Activity**: Regular releases and maintenance
-  2. **Adoption**: Healthy download statistics and community usage
-  3. **Minimalism**: Prefer smaller packages with fewer sub-dependencies
-  4. **Security**: History of prompt security fixes
-  5. **Documentation**: Comprehensive and up-to-date documentation
-- Consider pinning transitive dependencies using package manager features
 
 ## 🧾 Script Conventions
 
@@ -469,67 +432,14 @@ We recommend:
 > **AI Assistant Guidance**: When advising on code documentation, emphasize the mandatory use of JSDoc for all functions and modules. This is a non-negotiable requirement in our codebase.
 
 - **JSDoc is mandatory** for all exported functions, classes, and modules
-- Use comprehensive JSDoc comments with the following elements:
-
-```javascript
-/**
- * Processes a payment transaction
- * 
- * @fileoverview Use this at the top of files to describe the file's purpose
- * 
- * @param {Object} payment - Payment information
- * @param {string} payment.id - Unique payment identifier
- * @param {number} payment.amount - Payment amount in cents
- * @param {string} payment.currency - Three-letter currency code
- * @returns {Promise<Object>} Transaction result
- * @throws {ValidationError} If payment data is invalid
- * @throws {ProcessingError} If payment processing fails
- * @example
- * // Simple example of function usage
- * const result = await process_payment({
- *   id: 'payment_123',
- *   amount: 2000,
- *   currency: 'USD'
- * });
- */
-async function process_payment(payment) {
-  // Implementation
-}
-```
-
-- Use JSDoc to document:
+- Document the following using JSDoc:
   - Function parameters with types and descriptions
   - Return values with types and descriptions
   - Exceptions/errors that might be thrown
-  - Examples of usage for complex functions
   - Edge cases or special considerations
   - References to related functions or documentation
 - Document non-obvious code sections with inline comments that explain "why" not "what"
 - Generate reference documentation using JSDoc for API documentation
-
-#### Documentation Format for AI-Assisted Development
-
-For optimal AI assistance, documentation should contain structured elements that support direct test generation:
-
-```javascript
-/**
- * Verifies API access token is valid
- * 
- * @function verifyToken
- * @param {string} token - The access token to verify
- * 
- * @returns {Promise<Object>} Verification result
- * @returns {boolean} result.valid - Whether token is valid
- * @returns {Object} [result.claims] - Token claims when valid
- * 
- * @throws {Error} When token validation fails
- * 
- * @boundary_cases
- * 1. Empty token - Should throw Error
- * 2. Expired token - Should return {valid: false}
- * 3. Service unavailable - Should throw Error with specific message
- */
-```
 
 ## 🗂 Git & Collaboration
 
