@@ -13,7 +13,7 @@ Ensure these match the spelling and hex codes listed below to enable reliable au
 ## Priority
 
 | Label             | Color     | Purpose                                  |
-|------------------|-----------|------------------------------------------|
+|-------------------|-----------|------------------------------------------|
 | `priority/now`    | `#b60205` | Must be acted on immediately             |
 | `priority/next`   | `#d4c500` | Should be handled soon                   |
 | `priority/later`  | `#6a737d` | Deferred or lower importance             |
