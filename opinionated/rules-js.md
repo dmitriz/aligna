@@ -213,7 +213,7 @@ We recommend using **Jest** for testing with these opinionated approaches:
 
 ### Flat Test Structure vs. `describe` Blocks
 
-While the flat test structure is the default recommendation and the preferred choice of this guide for simplicity and readability, it is acknowledged that `describe` blocks can be beneficial for more complex test suites. It is, however, the intent of this guide to discourage from such complex scenarios in first place, replacing them instead with separate more focused test cases.
+While the flat test structure is the default recommendation and the preferred choice of this guide for simplicity and readability, it is acknowledged that `describe` blocks can be beneficial for more complex test suites. It is, however, the intent of this guide to discourage such complex scenarios in the first place, replacing them with separate, more focused test cases.
 
 ### Test-Driven Development Process
 
