@@ -34,7 +34,7 @@ This ruleset prioritizes:
 
 The following decisions have been **carefully considered** and are **not open for debate**:
 
-1. **Use CommonJS over ES Modules** - CommonJS is natively supported while ES Modules often require additional tooling.
+1. **Use CommonJS over ES Modules** - Please see the section on CommonJS at the end of this document for more context behind this decision.
 
 2. **Handle Environment Variables for Secrets Securely** - While environment variables are common in cloud-native deployments, they must be handled with care to avoid exposing secrets to the entire process environment. Recommended practices include integrating with secret management tools (e.g., HashiCorp Vault, AWS Secrets Manager), using runtime encryption, and enforcing strict linting to detect potential leaks.
 
@@ -218,6 +218,14 @@ Create comprehensive text-based documentation that is:
 - **Testable**: Includes concrete examples
 - **Deterministic**: Provides only one possible interpretation
 - **Minimal**: Demonstrates functionality without unnecessary complexity
+
+## On Module Format: CommonJS
+
+This project uses CommonJS (CJS) by deliberate and opinionated design. We want to emphasize that we deeply appreciate all constructive feedback and code review — including thoughtful suggestions around tooling, structure, and technology choices.
+
+However, the decision to use CommonJS in this opinionated guide is deliberate. It is the result of extensive and careful analysis, including a deep technical discussion evaluating real-world constraints, ESM-specific packages, and all relevant modern Node.js features. Every concrete challenge raised — from streaming to HTTP clients to native fetch support — has been fully addressed within CommonJS in a stable, testable, and maintainable way.
+
+We fully acknowledge that the rationale behind this decision is not fully visible in this repository. Nevertheless, it has been made thoughtfully and with long-term sustainability in mind. Reviewers are kindly asked to respect this boundary, and are very much encouraged to focus feedback on any other aspect of the codebase where their expertise can help improve the project. We’re grateful for that.
 
 ## 📖 Additional Resources
 
