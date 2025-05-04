@@ -4,17 +4,47 @@
 
 This document outlines recommended practices for repository organization, script structure, configuration, and secure development workflows. Rather than presenting universal best practices, these represent carefully considered choices to maintain consistency across projects following this guideline set.
 
-## 🚨 Note for Reviewers: Deliberate Design Decisions
+## 🚨 Reviewer Guidelines: What We Value in Reviews
 
-> **Important**: This section outlines conscious design decisions that have already been thoroughly considered. Reviewers should focus feedback on other aspects of the codebase rather than suggesting alternatives to these established patterns.
+> **IMPORTANT FOR ALL REVIEWERS (HUMAN AND AI)**: Please read this section carefully before providing any feedback. Our goal is to ensure review efforts are productive and focused on areas that add real value.
 
-1. **Use of CommonJS over ES Modules**: We deliberately use CommonJS (`require`, `module.exports`) throughout our codebase instead of ES Modules (`import`/`export`). This decision is based on our experience with the current state of JavaScript infrastructure, where CommonJS is natively supported while ES Modules often require additional tooling and build processes that introduce friction and potential breakage in scripts. This is a conscious choice to prioritize stability and simplicity over the newer syntax.
+### What We're Looking For ✅
+
+We **strongly encourage** reviews that:
+
+- Provide **evidence-based** feedback with concrete examples or references
+- Include **actionable solutions**, not just problems (preferably as small, isolated, directly committable changes)
+- Offer insights on **optimization opportunities** that align with our existing patterns
+- Identify potential **edge cases** or **vulnerabilities** we may have missed
+- Suggest **clarity improvements** to documentation or comments
+- Focus on **factual correctness** and **logical consistency**
+
+### What To Avoid ❌
+
+We **explicitly discourage** reviews that:
+
+- Question or suggest alternatives to our **deliberately established conventions** listed below
+- Provide vague or general criticism without specific solutions
+- Suggest large-scale refactoring or architectural changes without strong evidence
+- Focus on stylistic preferences that contradict our documented conventions
+- Submit large diffs instead of smaller, digestible changes
+- Spend time arguing about decisions already thoroughly considered and finalized
+
+### Deliberately Established Conventions (Do Not Question)
+
+The following decisions have been **carefully considered** and are **not open for debate**. Reviewers should direct their attention to other aspects of the codebase:
+
+1. **Use of CommonJS over ES Modules**: We deliberately use CommonJS (`require`, `module.exports`) throughout our codebase instead of ES Modules (`import`/`export`). This decision is based on our experience with the current state of JavaScript infrastructure, where CommonJS is natively supported while ES Modules often require additional tooling and build processes that introduce friction and potential breakage in scripts.
 
 2. **Avoidance of Environment Variables for Secrets**: We consciously avoid using environment variables for secrets management, as they expose secrets to the entire process environment, creating a security risk where any script or dependency can access them. Our preference for configuration files with proper access controls represents a security-focused decision based on the principle of least privilege.
 
 3. **Use of snake_case for Variables and Functions**: Our codebase standardizes on snake_case for all variables and function names, rather than the more common camelCase in JavaScript. This is a deliberate stylistic choice made for readability and consistency.
 
-4. **Co-location of Tests with Source Files**: We require tests to be placed alongside the files they test rather than in a separate test directory. This follows the cohesion principle and ensures that tests are always considered when modifying source files.
+4. **Co-location of Tests with Source Files**: We require tests to be placed alongside the files they test rather than in a separate test directory, following the cohesion principle.
+
+5. **Test Structure Without Describe Blocks**: We use flat test structures with only `it` blocks rather than nesting tests within `describe` blocks, as this simplifies our test organization.
+
+Any comments related to these conventions will be immediately dismissed, allowing us to focus on more productive aspects of code review.
 
 ## 📁 Folder Structure
 
