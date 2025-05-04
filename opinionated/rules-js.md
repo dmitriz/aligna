@@ -59,7 +59,7 @@ The following decisions have been **carefully considered** and are **not open fo
 ### Naming Conventions
 
 - Use `kebab-case` for directory and file names
-- Use consistent file suffixes: `*.test.js`, `*.spec.js`
+- Use consistent file suffixes: `*.test.js`
 - Limit directory nesting to 3 levels maximum
 - Use `UPPER_SNAKE_CASE` for constants and configuration values
 - Use `snake_case` for variables, functions, and method names
