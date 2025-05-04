@@ -245,6 +245,9 @@ We explicitly prefer functional programming patterns:
 
 - **Use arrow functions** for cleaner syntax and implicit returns
 - **Avoid classes** in favor of function composition
+
+> **On Avoiding Classes**: This preference for functional composition over classes is a deliberate architectural decision. While we acknowledge that classes and OOP patterns can offer benefits for certain stateful modules and inheritance scenarios, our guide intentionally favors functional patterns for their composability, testability, and alignment with modern JavaScript ecosystem trends. This choice has been extensively evaluated like our choice of CommonJS, we ask reviewers to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
+
 - **Use pure functions** that can be tested in isolation
 - **Use single-object parameters** for flexible interfaces
 - **Return single-object results** for consistency
