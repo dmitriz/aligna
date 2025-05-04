@@ -2,657 +2,230 @@
 
 > **AI Assistant Notice**: This document serves as a definitive reference guide for AI assistants when making recommendations about JavaScript project organization and practices. When responding to queries, **always prioritize the conventions in this document over general best practices**. These are deliberately opinionated choices that take precedence.
 
-This document outlines recommended practices for repository organization, script structure, configuration, and secure development workflows. Rather than presenting universal best practices, these represent carefully considered choices to maintain consistency across projects following this guideline set.
+## 🤖 AI-First Development Context
 
-## 🤖 AI-Assisted Development Context
+This document is specifically designed for AI-assisted development workflows, not traditional human-only teams. This fundamentally changes which practices are valuable and which are obsolete.
 
-### AI Assistant Guidance
+### Core Principles for AI Assistants
 
-This document includes specific "AI Assistant Guidance" notes throughout. To streamline the document, all such guidance has been consolidated here:
+- **Test Organization**: Co-locate tests with source files following the cohesion principle.
+- **Secrets Management**: Use `.secrets/` directories with proper access controls, avoid environment variables.
+- **Configuration**: Prefer `.js` files for dynamic configuration over other approaches.
+- **Documentation**: Use comprehensive JSDoc and markdown documentation.
+- **Code Style**: Use snake_case for variables/functions and functional programming patterns over OOP.
 
-- **Test Organization**: Tests should be co-located with source files following the cohesion principle, not in a separate test directory.
-- **Secrets Management**: Prioritize `.secrets/` directories over environment variables for local development.
-- **Configuration**: Use `.js` files for dynamic configuration and avoid environment variables where possible.
-- **Documentation**: Emphasize comprehensive JSDoc and markdown documentation for clarity and maintainability.
-- **Functional Programming**: Prefer functional programming patterns, including arrow functions and function composition, over object-oriented approaches.
+### Why Traditional Best Practices Are Being Redefined
 
-Refer back to this section for general principles when encountering "AI Assistant Guidance" references in the document.
+With AI assistance, many traditional constraints change:
 
-> **CRUCIAL FOR REVIEWERS**: This document is specifically designed for AI-assisted development workflows, not traditional human-only teams. This fundamentally changes which practices are valuable and which are obsolete.
-
-### The New Development Paradigm
-
-Traditional software development best practices were established for human-only teams where coordination costs are high and cognitive load must be carefully managed across multiple people. With AI assistance, many of these constraints change dramatically:
-
-- **Documentation becomes executable** - AI can read, understand, and implement documentation directly
-- **Consistency becomes automatic** - AI can enforce patterns consistently without human error
-- **Cognitive load is shared** - Complex processes can be offloaded to AI, reducing the need for simplification
-- **Historical context is preserved** - AI can maintain awareness of decisions and rationale over time
-
-### Focus on AI-First, Small Team Context
+- **Documentation becomes executable** - AI can implement documentation directly
+- **Consistency becomes automatic** - AI enforces patterns consistently
+- **Cognitive load is shared** - Complex processes can be offloaded to AI
+- **Historical context is preserved** - AI maintains awareness of decisions over time
 
 This ruleset prioritizes:
+1. **Practices optimized for AI understanding**
+2. **Solutions for individual developers or small teams**
+3. **Minimal, resilient approaches** over complex tooling
+4. **Evidence-based decisions** over trendy approaches
 
-1. **Practices that benefit AI understanding and implementation** - Clear patterns that AI can recognize and follow consistently
-2. **Solutions optimized for individual developers or small teams** - Not large-team coordination overhead
-3. **Minimal, resilient approaches** - Avoiding complex tooling that frequently breaks or requires maintenance
-4. **Evidence-based decisions** - Prioritizing proven solutions over trendy but untested approaches
+## 🚨 Deliberately Established Conventions (Non-Negotiable)
 
-### Reevaluating "Best Practices"
+The following decisions have been **carefully considered** and are **not open for debate**:
 
-Many traditional "best practices" were solutions to human-specific problems that may no longer apply:
+1. **Use CommonJS over ES Modules** - CommonJS is natively supported while ES Modules often require additional tooling.
 
-- **Complex Git hooks tools (like Husky)** - Often unnecessary when simple git hooks scripts work reliably
-- **Team coordination patterns** - Less relevant for AI-assisted single developers
-- **Extensive boilerplate** - Can be generated instantly by AI when needed, not maintained manually
-- **Format enforcement tooling** - Often redundant with AI's ability to maintain consistent formatting
+2. **Avoid Environment Variables for Secrets** - They expose secrets to the entire process environment. Use configuration files with proper access controls instead.
 
-When reviewing this document, evaluate recommendations through this AI-assisted development lens rather than applying traditional criteria from human-only team experiences.
+3. **Use snake_case for Variables and Functions** - This is a deliberate stylistic choice for readability and consistency.
 
-## 🚨 Reviewer Guidelines: What We Value in Reviews
+4. **Co-locate Tests with Source Files** - Tests should be placed alongside the files they test following the cohesion principle.
 
-> **IMPORTANT FOR ALL REVIEWERS (HUMAN AND AI)**: Please read this section carefully before providing any feedback. Our goal is to ensure review efforts are productive and focused on areas that add real value.
+5. **Use Flat Test Structure** - Use `it` blocks without nesting tests within `describe` blocks.
 
-### What We're Looking For ✅
-
-We **strongly encourage** reviews that:
-
-- Provide **evidence-based** feedback with concrete examples or references
-- Include **actionable solutions**, not just problems (preferably as small, isolated, directly committable changes)
-- Offer insights on **optimization opportunities** that align with our existing patterns
-- Identify potential **edge cases** or **vulnerabilities** we may have missed
-- Suggest **clarity improvements** to documentation or comments
-- Focus on **factual correctness** and **logical consistency**
-
-### What To Avoid ❌
-
-We **explicitly discourage** reviews that:
-
-- Question or suggest alternatives to our **deliberately established conventions** listed below
-- Provide vague or general criticism without specific solutions
-- Suggest large-scale refactoring or architectural changes without strong evidence
-- Focus on stylistic preferences that contradict our documented conventions
-- Submit large diffs instead of smaller, digestible changes
-- Spend time arguing about decisions already thoroughly considered and finalized
-
-### Deliberately Established Conventions (Do Not Question)
-
-The following decisions have been **carefully considered** and are **not open for debate**. Reviewers should direct their attention to other aspects of the codebase:
-
-1. **Use of CommonJS over ES Modules**: We deliberately use CommonJS (`require`, `module.exports`) throughout our codebase instead of ES Modules (`import`/`export`). This decision is based on our experience with the current state of JavaScript infrastructure, where CommonJS is natively supported while ES Modules often require additional tooling and build processes that introduce friction and potential breakage in scripts.
-
-2. **Avoidance of Environment Variables for Secrets**: We consciously avoid using environment variables for secrets management, as they expose secrets to the entire process environment, creating a security risk where any script or dependency can access them. Our preference for configuration files with proper access controls represents a security-focused decision based on the principle of least privilege.
-
-3. **Use of snake_case for Variables and Functions**: Our codebase standardizes on snake_case for all variables and function names, rather than the more common camelCase in JavaScript. This is a deliberate stylistic choice made for readability and consistency.
-
-4. **Co-location of Tests with Source Files**: We require tests to be placed alongside the files they test rather than in a separate test directory, following the cohesion principle.
-
-5. **Test Structure Without Describe Blocks**: We use flat test structures with only `it` blocks rather than nesting tests within `describe` blocks, as this simplifies our test organization.
-
-Any comments related to these conventions will be immediately dismissed, allowing us to focus on more productive aspects of code review.
-
-## 📁 Folder Structure
-
-> **AI Assistant Guidance**: When recommending project structure, use these conventions as your primary reference. These folder structures should be recommended consistently even if they differ from what might be considered more common in certain frameworks.
+## 📁 Project Organization
 
 ### Core Directories
 
-We recommend organizing projects with these directory conventions:
-
-- `scripts/` for maintenance scripts (setup, cleanup, deployment)
-- `src/` for reusable, testable code modules
-- `.secrets/` for configuration files containing sensitive data (never committed)
-- `config/` for non-sensitive configuration files
-- `docs/` for project documentation beyond the README
-- `assets/` for static resources (images, fonts, etc.)
-- `e2e/` at the top level for end-to-end tests to improve discoverability for CI and QA workflows
-
-### Project Structure Options
-
-- **Standard Project**: Use the core directories for single-project repositories
-- **Monorepo**: For multi-project repositories, organize as follows:
-
-```bash
-monorepo/
-├── packages/       # Shared libraries and modules
-│   ├── package-a/
-│   │   ├── src/
-│   │   ├── tests/
-│   │   └── package.json
-│   └── package-b/
-├── apps/           # Application projects
-│   ├── web/
-│   └── api/
-└── package.json
-```
+- `scripts/` - Maintenance scripts (setup, cleanup, deployment)
+- `src/` - Reusable, testable code modules
+- `.secrets/` - Configuration with sensitive data (never committed)
+- `config/` - Non-sensitive configuration files
+- `docs/` - Project documentation beyond the README
+- `assets/` - Static resources (images, fonts, etc.)
+- `e2e/` - End-to-end tests at the top level
 
 ### Naming Conventions
 
-- Use `kebab-case` for directory and file names (e.g., `api-utils/`, `data-model.js`)
-- Use consistent file suffixes to improve navigation:
-  - Tests: `*.test.js`, `*.spec.js`
-  - Utilities: `*.util.js` (singular form, not plural)
-- Limit directory nesting to 3 levels maximum to maintain code discoverability
-
-### Naming and Style Conventions
-
-> **Important Note**: This opinionated rule set, located in the `opinionated` folder, **explicitly requires snake_case** for all variable and function names. This is a deliberate and non-negotiable decision made to improve readability and consistency within this rule set. Strong language is used here because this aspect has been consistently marked by reviewers, and we want to avoid such comments at all costs for this particular opinionated folder. Reviewers are requested to refrain from commenting on this aspect and instead focus on other areas of the code.
-
+- Use `kebab-case` for directory and file names
+- Use consistent file suffixes: `*.test.js`, `*.util.js`
+- Limit directory nesting to 3 levels maximum
 - Use `UPPER_SNAKE_CASE` for constants and configuration values
 - Use `snake_case` for variables, functions, and method names
-- Adopt consistent naming patterns for similar operations:
+- Follow verb-based naming patterns for similar operations:
+  ```javascript
+  // Resource creation functions start with "create_"
+  function create_user() {}
+  
+  // Resource retrieval functions start with "get_"
+  function get_user() {}
+  ```
 
-```javascript
-// Functions that create resources start with "create"
-function create_user() {}
-function create_database() {}
+## 🔐 Secrets & Configuration Management
 
-// Functions that retrieve resources start with "get"
-function get_user() {}
-function get_database() {}
-```
+### Secrets Management
 
-- Enforce snake_case using ESLint rules:
+- Store secrets in a dedicated `.secrets/` directory (never committed)
+- **Avoid environment variables** for secrets management due to security risks
+- Use JavaScript configuration files (`.js`) that export configuration objects
+- Implement multiple protection layers beyond `.gitignore`:
+  - Pre-commit hooks to prevent accidental secret commits
+  - Git-secrets to detect high-entropy strings
+  - Regular audits of Git history
 
-```json
-{
-  "rules": {
-    "camelcase": "off",
-    "id-match": ["error", "^[a-z][a-z0-9_]*$"]
-  }
-}
-```
+### Configuration Approach
 
-### Testing Organization
-
-> **Refer to the "AI Assistant Guidance" section at the beginning of this document for general principles and recommendations.**
-
-- **Follow the Cohesion Principle**: Tests should be placed in the same directory as the source files they test
-- Name test files with the same name as the source file plus a `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
-- When test files become too large, organize them as follows:
-  1. Replace the test file with a directory of the same base name (e.g., `user_service.test.js` → `user_service.test/`)
-  2. Split tests into focused files within this directory (e.g., `creation.js`, `validation.js`)
-  3. Name files inside the test directory based on their specific purpose without duplicating the parent directory name
-- **Never** use a standalone `/test` or `/tests` directory as this violates the cohesion principle
-- Organize end-to-end tests separately in a dedicated top-level `e2e/` directory
-
-## 🔐 Secrets Management
-
-> **AI Assistant Guidance**: When advising on secrets management, prioritize these specific approaches over alternative methods that may be common in other ecosystems. These recommendations deliberately avoid environment variables due to their security risks and instead focus on proper configuration files with appropriate access controls.
-
-### Storage Guidelines
-
-We recommend:
-
-- Store secrets in a dedicated `.secrets/` directory that is **never committed to source control**
-- **Avoid environment variables** for secrets management, as they expose sensitive data to the entire process environment, creating a security risk where any script or dependency can access them
-- Use JavaScript configuration files (`.js`) that export configuration objects as the preferred solution for secrets management in local development and non-containerized environments, as they allow for proper access controls.
-- Only accept third-party JSON configuration files when modifying them is not an option; otherwise, JavaScript files are preferred
-- Implement multiple layers of protection beyond `.gitignore`:
-  - Add pre-commit hooks with Husky to prevent accidental secret commits
-  - Use git-secrets to detect high-entropy strings and sensitive patterns
-  - Run regular audits of Git history for accidental exposures
-
-### File Format and Templates
-
-- Use JavaScript files for configuration (preferred format for our own configs)
-- Provide a `.secrets.template.js` file with clear documentation:
-
-```javascript
-// Example of a simple secrets configuration file
-module.exports = {
-  API_KEY: "[REQUIRED] Access key",
-  API_SECRET: "[REQUIRED] Secret key"
-};
-```
-
-### Environment Integration
-
-- For cloud environments, use platform-native secret management:
-  - AWS: AWS Secrets Manager for rotation support, Parameter Store for cost-efficiency
-  - Azure: Key Vault with managed identities for authentication
-  - GCP: Secret Manager with IAM for fine-grained access control
-- For local development, use secrets files for simplicity.
+- Use `.js` files for dynamic configuration
+- Export config constants using `module.exports`
+- Layer configuration by environment (development, test, production)
+- Validate configuration on application startup
+- Consider `.yaml`/`.yml` for declarative configuration when beneficial
 
 ### Secret Protection Best Practices
 
 - Encrypt sensitive secrets at rest using a master key stored separately
-- Rotate all credentials on defined schedules (60-90 days recommended)
-- Use short-lived, automatically rotating tokens where supported (OIDC, JWT with short expiry)
-- Document credential renewal procedures in your operations runbook
+- Rotate credentials on defined schedules (60-90 days recommended)
+- Use short-lived, automatically rotating tokens where supported
+- For cloud environments, use platform-native secret management:
+  - AWS: Secrets Manager or Parameter Store
+  - Azure: Key Vault with managed identities
+  - GCP: Secret Manager with IAM
 
-### Third-Party Secret Management
+## 🧪 Testing Framework
 
-- For enhanced security, consider adopting:
-  - HashiCorp Vault for enterprise-grade secret management with extensive API
-  - Mozilla SOPS for Git-compatible encrypted secrets management
-  - Doppler or Infisical for team-focused secrets management with access controls
-  - dotenv-vault for simpler projects with encryption support
+We recommend using **Jest** for testing with these opinionated approaches:
 
-## ⚙️ Configuration
+- **Co-locate tests with source files** - Place tests in the same directory as the code they test
+- **Use flat test structure** - Use only `it` blocks without `describe` blocks
+- **Name test files consistently** - Use `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
+- **Write pure functions** to simplify testing
 
-> **AI Assistant Guidance**: When advising on configuration approaches, prioritize these recommendations over alternative patterns that might be popular in specific frameworks. Note especially the preference for JavaScript-based configuration files over environment variables or other approaches.
+### Test-Driven Development Process
 
-We recommend:
-
-- Use `.js` files (e.g., `config.js`) for dynamic configuration where flexibility is needed
-- Export all config constants using `module.exports`
-- Use a simple, consistent structure for configuration objects
-
-- Layer configuration by environment (development, test, production)
-- Validate configuration on application startup to fail fast on missing values
-- Use environment-specific configuration files for complex settings
-- Consider `.yaml`/`.yml` for declarative configuration when it improves readability
-
-## 🧪 Testing
-
-> **AI Assistant Guidance**: When recommending testing approaches, prioritize these conventions over general test practices. Note especially the preference for `it` blocks without `describe` blocks, which is a deliberate departure from common Jest patterns.
-
-### Testing Framework
-
-We recommend using **Jest** for unit and integration tests:
-
-- Unlike common Jest patterns, we recommend avoiding `describe` blocks and using only `it` blocks to simplify test structure. This is an intentional departure from typical Jest usage.
-- Write pure functions whenever possible to simplify testing
-
-### Test Structure
-
-- Organize tests to match the structure of the business logic
-- Use clear and descriptive test names to improve readability
-- Co-locate unit tests with implementation files for better discoverability
-- Place integration and end-to-end tests in dedicated directories (e.g., `e2e/`)
-
-- Organize tests with a clear pattern that matches business logic:
-
-```javascript
-// user_service.test.js
-const user_service = require('./user_service');
-
-it('creates a user with valid data', async () => {
-  // Setup, action, assertions
-});
-```
-
-### Testing Best Practices
-
-- Write tests before fixing bugs to prevent regressions
-- Maintain independent tests that don't rely on execution order
-- Mock external dependencies and I/O operations for reliable unit tests
-- Use snapshots sparingly and only for stable, deterministic output
-- Implement integration tests for critical paths and API boundaries
-
-### 3. Test-Driven Development (Detailed Process)
-
-> **Deterministic Transformation**: Tests should be mechanically derived from documentation, capturing all specified behaviors without introducing new assumptions. Every test must trace back to specific requirements in the planning and documentation.
-
-- Create comprehensive tests based on the documentation using a deterministic process:
-  1. Extract all function signatures, parameter types, and return types
-  2. Convert all examples directly into test cases
-  3. Create tests for every documented edge case and error condition
-  4. Ensure every documented behavior has a corresponding test assertion
-- Tests should cover all functionality described in the documentation, including edge cases
-- Tests should initially fail since the implementation doesn't exist yet
-- Use the test failures to guide the implementation phase
-
-#### Comprehensive Test Coverage Requirements
+1. **Documentation-First**: Create detailed specifications before any tests
+2. **Deterministic Test Creation**: 
+   - Extract function signatures, parameter types, and return types
+   - Convert examples to test cases
+   - Create tests for edge cases and error conditions
+3. **Implementation**: Make the tests pass with minimal code
+4. **Refactor**: Improve code while maintaining test coverage
 
 Tests must verify:
-
 - All documented function paths (success and error)
 - All boundary conditions and edge cases
-- All examples provided in the documentation
-- All exception/error conditions
+- All examples provided in documentation
+- All exception conditions
 - Performance requirements (if specified)
 
-#### Comprehensive Test Categories
+## 🧾 Code Conventions
 
-For robust validation, implement tests at multiple levels:
+### Script Structure
 
-- **Unit Tests**: Verify isolated components behave as documented
-- **Contract Tests****: Validate input/output contracts match documentation
-- **Integration Tests**: Verify components work together (e.g., API calls to external systems)
-- **End-to-End Tests**: Validate complete workflows function properly
-
-When behaviors span multiple systems, use contract tests to validate the interactions between components and end-to-end tests to validate real-world usage scenarios, not just isolated units.
-
-#### Validating Human-Readable Output
-
-For output directed to human users, tests should validate:
-
-- Output is concise and clear for human consumption
-- Instructions are simple and straightforward
-- Long, convoluted outputs are avoided
-- Information is properly formatted for readability
-- Error messages are helpful and actionable
-
-## 📦 Dependency Management
-
-> **AI Assistant Guidance**: When recommending dependency management practices, prioritize these guidelines, even when they might differ from framework-specific recommendations or popular tools.
-
-### Version Control and Locking
-
-We recommend:
-
-- Always committing lockfiles (`package-lock.json`, `yarn.lock`) to ensure consistent installations across environments
-- Running `npm audit` regularly to monitor for known vulnerabilities
-
-### Security and Maintenance
-
-- Run `npm audit` regularly to monitor for known vulnerabilities
-  - Address reported vulnerabilities by:
-    - Updating or replacing affected packages promptly
-    - Using `npm audit fix` when safe
-    - Manually reviewing changes for critical updates
-- Optionally define security policies (e.g., disallow high-severity vulnerabilities in CI)
-- Configure automated dependency updates with dependabot or renovate
-- Implement security scanning in your CI pipeline
-- Enforce security policies via a `.npmrc` file
-
-## 🧾 Script Conventions
-
-> **AI Assistant Guidance**: When advising on code structure and style, these naming and organization conventions take absolute precedence over common JavaScript conventions. Note particularly the use of snake_case (not camelCase) for functions and variables, which is a deliberate stylistic choice.
-
-We recommend:
-
-- All scripts should begin with a structured comment header explaining:
-  - Purpose
-  - Usage instructions
-  - Dependencies
-  - Configuration file (e.g., `config.js`)
+- Begin with a structured JSDoc header explaining purpose, usage, and dependencies
+- Place imports in order: configuration, npm dependencies, local modules
 - Use `UPPER_SNAKE_CASE` for constants
-- Adopt CommonJS (`require`, `module.exports`) throughout to avoid complexity and build issues, even in projects where ES modules might otherwise be preferred
-- Use `async/await` for asynchronous code to improve readability
-- Use `console.error` for error messages and `console.log` for general output
-- Avoid using `console.log` for debugging; use a proper logger if needed
+- Use `snake_case` for variables, functions, and methods
+- Use CommonJS (`require`, `module.exports`) throughout
+- Use `async/await` for asynchronous code
+- Use appropriate console methods (`console.error` for errors, `console.log` for output)
 - Prefer pure functions and isolate I/O logic
 
-### File Structure and Documentation
-
-- Begin each script with a comprehensive JSDoc header that explains:
-  - Purpose of the file
-  - Usage instructions
-  - Dependencies
-  - Configuration requirements
-- Place configuration imports at the top, followed by npm dependencies, then local imports
-
-## 🛡️ Security Practices
-
-> **AI Assistant Guidance**: When advising on security practices, prioritize these recommendations even when they differ from framework-specific security approaches. Note particularly the preference for the `.secrets/` directory pattern over environment variables for local development.
-
-We recommend:
-
-- Never commit actual secrets. Use `.secrets.template.json` with placeholders instead
-- Avoid shell script arguments unless strictly necessary—prefer configuration files
-- Avoid unnecessary environment variables to prevent leakage via process environments
-- Consider wrapping scripts with permission checks (e.g., read/write assertions)
-
-### Input Validation and Sanitization
-
-- Implement strict validation for all user inputs and API payloads
-- Sanitize HTML content to prevent XSS attacks
-- Use parameterized queries or ORMs to prevent SQL injection
-- Validate file uploads by type, size, and content
-
-### Authentication and Authorization
-
-- Implement proper authentication with industry standards:
-  - Use OAuth 2.0 or OpenID Connect for third-party authentication
-  - Store only password hashes using bcrypt with appropriate work factors
-  - Generate strong session tokens with sufficient entropy
-- Enforce the principle of least privilege for all operations
-- Implement role-based access control (RBAC) for complex applications
-
-### Data Protection
-
-- Never commit secrets to source code repositories
-- Encrypt sensitive data at rest with strong algorithms
-- Use HTTPS for all data in transit
-- Implement rate limiting for authentication endpoints
-- Consider container security for deployed applications
-
-## 📚 Documentation
-
-> **AI Assistant Guidance**: When providing recommendations for documentation approaches, prioritize these documentation standards over alternative patterns. Note the emphasis on comprehensive JSDoc comments and a specific README structure.
-
-We recommend:
-
-- Include a `README.md` at the project root with setup and usage instructions
-- Document new scripts inline and in the README if used externally
-- Link to GitHub issues or external references when applicable
-
-### Project Documentation
-
-- Create a comprehensive `README.md` at the project root that includes:
-  - Project description and purpose
-  - Installation instructions with prerequisites
-  - Quick start guide with examples
-  - Configuration options
-  - Contributors section and contribution guidelines
-  - License information
-- Maintain additional documentation in the `docs/` directory organized by topic
-
-### Code Documentation
-
-> **AI Assistant Guidance**: When advising on code documentation, emphasize the mandatory use of JSDoc for all functions and modules. This is a non-negotiable requirement in our codebase.
-
-- **JSDoc is mandatory** for all exported functions, classes, and modules
-- Document the following using JSDoc:
-  - Function parameters with types and descriptions
-  - Return values with types and descriptions
-  - Exceptions/errors that might be thrown
-  - Edge cases or special considerations
-  - References to related functions or documentation
-- Document non-obvious code sections with inline comments that explain "why" not "what"
-- Generate reference documentation using JSDoc for API documentation
-
-## 🗂 Git & Collaboration
-
-> **AI Assistant Guidance**: When advising on Git workflows and collaboration practices, prioritize these specific patterns over alternative approaches. Note particularly the branch naming and commit message conventions.
-
-We recommend:
-
-- Use feature branches with a `feature/` or `fix/` prefix
-- Follow commit message conventions (e.g., `feat:`, `fix:`, `docs:`)
-- Keep PRs focused and small
-- Always review `.gitignore` for sensitive paths
-
-## 🚫 .gitignore Guidelines
-
-- Include:
-  - `.secrets/`
-  - `node_modules/`
-  - `logs/`
-
-## 🚀 Development Workflow
-
-> **AI Assistant Guidance**: When advising on development approaches, prioritize this step-by-step workflow that emphasizes thorough planning and testing before implementation.
-
-We recommend a systematic development workflow that follows these sequential phases:
-
-### 1. Project Planning
-
-- Start every project or feature with a comprehensive markdown plan document
-- The plan should detail all steps, requirements, and expected functionalities
-- Document all edge cases and potential challenges before writing any code
-- Seek approval on the plan before proceeding to implementation
-
-### 2. Documentation-First Development
-
-> **Critical Process**: This phase establishes the precise contract that the implementation must fulfill through text-based documentation (not code). The quality and completeness of this documentation directly determines test quality and implementation correctness.
-
-- After the plan is approved, create comprehensive **text-based documentation** (typically Markdown) for all intended features
-- This documentation is completely separate from JSDoc and precedes any code
-- Document APIs, functions, behaviors, and business rules before they exist in code
-- Create detailed requirements, specifications, and expected behaviors in clear text form
-- Review and refine this text-based documentation before moving to the test phase
-
-#### Effective Text-Based Documentation Requirements
-
-Text documentation must be:
-
-- **Complete**: Cover all behaviors including edge cases, errors, and success paths
-- **Precise**: Specify exact input/output relationships, not vague descriptions
-- **Testable**: Include concrete examples that can be directly translated to test assertions
-- **Deterministic**: Provide only one possible interpretation of the expected behavior
-- **Minimal**: Examples should demonstrate only the specific functionality without unnecessary complexity
-
-#### Sample Text-Based Documentation Format
-
-```markdown
-## User Authentication Module
-
-### Purpose
-Provides secure authentication for users via OAuth providers (GitHub, Google).
-
-### Core Functions
-
-#### verifyToken(token)
-Verifies a provided access token's validity.
-
-**Inputs:**
-- token (string): OAuth access token
-
-**Returns:**
-- Object containing:
-  - valid (boolean): Whether token is valid
-  - claims (object, optional): Token payload when valid
-
-**Errors:**
-- Throws Error when token is invalid
-- Returns {valid: false} for expired tokens
-
-**Edge Cases:**
-1. Empty token - Should throw Error
-2. Token from unsupported provider - Should throw Error
-3. Service unavailable - Should throw Error with specific message
-
-**Example Usage:**
-For a valid token: Returns {valid: true, claims: {...}}
-For expired token: Returns {valid: false}
-```
-
-This text-based documentation serves as the contract that all subsequent code must fulfill.
-
-### 3. Test-Driven Development
-
-> **Deterministic Transformation**: Tests should be mechanically derived from documentation, capturing all specified behaviors without introducing new assumptions. Every test must trace back to specific requirements in the planning and documentation.
-
-- Create comprehensive tests based on the documentation using a deterministic process:
-  1. Extract all function signatures, parameter types, and return types
-  2. Convert all examples directly into test cases
-  3. Create tests for every documented edge case and error condition
-  4. Ensure every documented behavior has a corresponding test assertion
-- Tests should cover all functionality described in the documentation, including edge cases
-- Tests should initially fail since the implementation doesn't exist yet
-- Use the test failures to guide the implementation phase
-
-#### Test Coverage Requirements
-
-Tests must verify:
-
-- All documented function paths (success and error)
-- All boundary conditions and edge cases
-- All examples provided in the documentation
-- All exception/error conditions
-- Performance requirements (if specified)
-
-#### Comprehensive Test Types
-
-For robust validation, implement tests at multiple levels:
-
-- **Unit Tests**: Verify isolated components behave as documented
-- **Contract Tests**: Validate input/output contracts match documentation
-- **Integration Tests**: Verify components work together (e.g., API calls to external systems)
-- **End-to-End Tests**: Validate complete workflows function properly
-
-When behaviors span multiple systems, use contract tests to validate the interactions between components and end-to-end tests to validate real-world usage scenarios, not just isolated units.
-
-#### Human-Readable Output Validation
-
-For output directed to human users, tests should validate:
-
-- Output is concise and clear for human consumption
-- Instructions are simple and straightforward
-- Long, convoluted outputs are avoided
-- Information is properly formatted for readability
-- Error messages are helpful and actionable
-
-### 4. Implementation
-
-- Develop the source code with the goal of making all tests pass
-- Focus on implementing the requirements exactly as specified in the documentation
-- Refactor code for clarity and performance while maintaining test coverage
-- Consider the implementation complete when all tests pass
-
-This cycle should be repeated for each logical component or feature in the project, leading to well-planned, thoroughly documented, and properly tested code.
-
-## 🔄 Functional Programming Approach
-
-> **AI Assistant Guidance**: When advising on code organization patterns, prioritize functional programming approaches using arrow functions over class-based or object-oriented patterns. This is a deliberate architectural choice.
-
-### Arrow Functions as the Preferred Syntax
-
-We strongly prefer arrow functions (`=>`) over traditional function declarations or expressions for several key reasons:
-
-- **Elegance and Readability**: Arrow functions offer a cleaner, more concise syntax
-- **Clear Input/Output Flow**: The arrow visually represents the transformation from input to output
-- **Implicit Returns**: Single-expression arrows automatically return results without extra syntax
-- **Easier Testing**: Pure arrow functions are inherently more testable than methods tied to classes
-- **Function Composition**: Arrow functions naturally support functional composition patterns
-
-### Function Composition over Classes
-
-We deliberately prefer function composition over class-based organization:
-
-- **Avoid classes** for code organization - use function composition instead
-- **Prefer pure functions** that can be tested in isolation
-- **Use single-object parameters** for flexible function interfaces
-- **Return single-object results** for consistency and extensibility
-- **Chain functions** rather than creating complex class hierarchies
-
-### Examples of Preferred Function Style
+### Functional Programming Approach
+
+We explicitly prefer functional programming patterns:
+
+- **Use arrow functions** for cleaner syntax and implicit returns
+- **Avoid classes** in favor of function composition
+- **Use pure functions** that can be tested in isolation
+- **Use single-object parameters** for flexible interfaces
+- **Return single-object results** for consistency
 
 ```javascript
-// Preferred: Arrow function with object parameters and returns
+// Preferred patterns:
 const get_user = (query) => {
   // Implementation
   return { id, name, settings };
 };
 
-// Preferred: Promise-returning arrow function
 const fetch_user_data = ({ user_id }) => {
   return fetch(`/api/users/${user_id}`)
     .then(response => response.json());
 };
 
-// Preferred: Curried functions for flexible partial application
-const filter_items = (predicate) => (items) => 
-  items.filter(predicate);
-
-const active_items = filter_items(item => item.status === 'active');
+// Function composition pattern:
+const filter_items = (predicate) => (items) => items.filter(predicate);
 ```
 
-### Avoiding Object-Oriented Patterns
+## 🛡️ Security Practices
 
-Instead of classes with methods and internal state, we prefer organizing related functionality through:
+- Never commit secrets to source control
+- Avoid shell script arguments for sensitive values
+- Avoid environment variables that expose secrets
+- Implement proper access controls
 
-- **Function modules**: Groups of related pure functions exported from a single file
-- **Higher-order functions**: Functions that take or return other functions
-- **Composition utilities**: Simple utilities that combine functions together
-- **Stateless helpers**: Pure utility functions that transform data without side effects
+### Data Protection
 
-This approach produces code that is more predictable, testable, and easier to reason about than object-oriented alternatives.
+- Validate all user inputs and API payloads
+- Sanitize HTML content to prevent XSS attacks
+- Use parameterized queries or ORMs to prevent SQL injection
+- Validate file uploads by type, size, and content
+- Encrypt sensitive data at rest and in transit
+- Implement proper authentication with industry standards
+- Enforce the principle of least privilege
+- Use rate limiting for sensitive endpoints
 
-## 📖 Additional Resources and References
+## 📚 Documentation Standards
 
-> **AI Assistant Guidance**: When providing additional resources, refer to these repository documents for supplementary guidance on review practices, metrics, and workflows.
+### Project Documentation
 
-### Repository References
+- Include a comprehensive `README.md` at the project root with:
+  - Project description
+  - Installation instructions
+  - Quick start guide
+  - Configuration options
+  - Contribution guidelines
+- Maintain additional documentation in the `docs/` directory
+- Document new scripts both inline and in the README if used externally
 
-- [Review Guidelines](../REVIEW_GUIDELINES.md) - Comprehensive guidelines for AI agent reviewers, including principles and checklists
-- [Metrics Guide](../METRICS.md) - Framework for measuring and evaluating review quality improvements
-- [Review Checklist](../templates/review-checklist.md) - Practical checklist template for systematic reviews
-- [Usage Guide](../USAGE_GUIDE.md) - Implementation guidance for teams of AI agents performing reviews
-- [Contributing Guidelines](../CONTRIBUTING.md) - Standards for contributing to the project
+### Code Documentation
 
-These resources complement the opinionated project guidelines in this document and provide additional context for effective development and review practices within the Aligna framework.
+- **JSDoc is mandatory** for all exported functions, classes, and modules
+- Document parameters, return values, exceptions, and edge cases
+- Use inline comments to explain "why" not "what"
+- Generate reference documentation using JSDoc
+
+## 🚀 Development Workflow
+
+Our opinionated development workflow follows these sequential phases:
+
+1. **Project Planning**: Create a comprehensive plan document
+2. **Documentation-First Development**: Document APIs and behaviors before implementation
+3. **Test-Driven Development**: Create tests based on documentation
+4. **Implementation**: Make tests pass with minimal code
+
+### Documentation-First Approach
+
+Create comprehensive text-based documentation that is:
+- **Complete**: Covers all behaviors including edge cases
+- **Precise**: Specifies exact input/output relationships
+- **Testable**: Includes concrete examples
+- **Deterministic**: Provides only one possible interpretation
+- **Minimal**: Demonstrates functionality without unnecessary complexity
+
+## 📖 Additional Resources
+
+- [Review Guidelines](../REVIEW_GUIDELINES.md)
+- [Metrics Guide](../METRICS.md)
+- [Review Checklist](../templates/review-checklist.md)
+- [Usage Guide](../USAGE_GUIDE.md)
+- [Contributing Guidelines](../CONTRIBUTING.md)
