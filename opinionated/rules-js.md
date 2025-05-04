@@ -4,6 +4,18 @@
 
 This document outlines recommended practices for repository organization, script structure, configuration, and secure development workflows. Rather than presenting universal best practices, these represent carefully considered choices to maintain consistency across projects following this guideline set.
 
+## 🚨 Note for Reviewers: Deliberate Design Decisions
+
+> **Important**: This section outlines conscious design decisions that have already been thoroughly considered. Reviewers should focus feedback on other aspects of the codebase rather than suggesting alternatives to these established patterns.
+
+1. **Use of CommonJS over ES Modules**: We deliberately use CommonJS (`require`, `module.exports`) throughout our codebase instead of ES Modules (`import`/`export`). This decision is based on our experience with the current state of JavaScript infrastructure, where CommonJS is natively supported while ES Modules often require additional tooling and build processes that introduce friction and potential breakage in scripts. This is a conscious choice to prioritize stability and simplicity over the newer syntax.
+
+2. **Avoidance of Environment Variables for Secrets**: We consciously avoid using environment variables for secrets management, as they expose secrets to the entire process environment, creating a security risk where any script or dependency can access them. Our preference for configuration files with proper access controls represents a security-focused decision based on the principle of least privilege.
+
+3. **Use of snake_case for Variables and Functions**: Our codebase standardizes on snake_case for all variables and function names, rather than the more common camelCase in JavaScript. This is a deliberate stylistic choice made for readability and consistency.
+
+4. **Co-location of Tests with Source Files**: We require tests to be placed alongside the files they test rather than in a separate test directory. This follows the cohesion principle and ensures that tests are always considered when modifying source files.
+
 ## 📁 Folder Structure
 
 > **AI Assistant Guidance**: When recommending project structure, use these conventions as your primary reference. These folder structures should be recommended consistently even if they differ from what might be considered more common in certain frameworks.
@@ -44,7 +56,6 @@ monorepo/
 - Use `kebab-case` for directory and file names (e.g., `api-utils/`, `data-model.js`)
 - Use consistent file suffixes to improve navigation:
   - Tests: `*.test.js`, `*.spec.js`
-  - Types: `*.types.ts`, `*.d.ts`
   - Utilities: `*.util.js` (singular form, not plural)
 - Limit directory nesting to 3 levels maximum to maintain code discoverability
 
@@ -79,18 +90,28 @@ function get_database() {}
 
 ### Testing Organization
 
-- Co-locate tests with implementation files
-- Use Jest's naming conventions consistently (`.test.js` or `.spec.js`)
+> **AI Assistant Guidance**: When advising on test organization, emphasize that tests should be co-located with source files following the cohesion principle, not in a separate test directory. This is a deliberate design decision.
+
+- **Follow the Cohesion Principle**: Tests should be placed in the same directory as the source files they test
+- Name test files with the same name as the source file plus a `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
+- When test files become too large, organize them as follows:
+  1. Replace the test file with a directory of the same base name (e.g., `user_service.test.js` → `user_service.test/`)
+  2. Split tests into focused files within this directory (e.g., `creation.js`, `validation.js`)
+  3. Name files inside the test directory based on their specific purpose without duplicating the parent directory name
+- **Never** use a standalone `/test` or `/tests` directory as this violates the cohesion principle
 - Organize end-to-end tests separately in a dedicated top-level `e2e/` directory
 
 ## 🔐 Secrets Management
 
-> **AI Assistant Guidance**: When advising on secrets management, prioritize these specific approaches over alternative methods that may be common in other ecosystems. These recommendations place a particular emphasis on using the `.secrets/` directory pattern rather than environment-based approaches that might be more common.
+> **AI Assistant Guidance**: When advising on secrets management, prioritize these specific approaches over alternative methods that may be common in other ecosystems. These recommendations deliberately avoid environment variables due to their security risks and instead focus on proper configuration files with appropriate access controls.
 
 ### Storage Guidelines
 
 We recommend:
 - Store secrets in a dedicated `.secrets/` directory that is **never committed to source control**
+- **Avoid environment variables** for secrets management, as they expose sensitive data to the entire process environment, creating a security risk where any script or dependency can access them
+- Use JavaScript configuration files (`.js`) that export configuration objects as the preferred solution for secrets management, as they allow for proper access controls
+- Only accept third-party JSON configuration files when modifying them is not an option; otherwise, JavaScript files are preferred
 - Implement multiple layers of protection beyond `.gitignore`:
   - Add pre-commit hooks with Husky to prevent accidental secret commits
   - Use git-secrets to detect high-entropy strings and sensitive patterns
@@ -333,11 +354,16 @@ We recommend:
 
 ### Code Documentation
 
-- Use JSDoc comments for all exported functions, classes, and interfaces:
+> **AI Assistant Guidance**: When advising on code documentation, emphasize the mandatory use of JSDoc for all functions and modules. This is a non-negotiable requirement in our codebase.
+
+- **JSDoc is mandatory** for all exported functions, classes, and modules
+- Use comprehensive JSDoc comments with the following elements:
 
 ```javascript
 /**
  * Processes a payment transaction
+ * 
+ * @fileoverview Use this at the top of files to describe the file's purpose
  * 
  * @param {Object} payment - Payment information
  * @param {string} payment.id - Unique payment identifier
@@ -346,15 +372,28 @@ We recommend:
  * @returns {Promise<Object>} Transaction result
  * @throws {ValidationError} If payment data is invalid
  * @throws {ProcessingError} If payment processing fails
+ * @example
+ * // Simple example of function usage
+ * const result = await process_payment({
+ *   id: 'payment_123',
+ *   amount: 2000,
+ *   currency: 'USD'
+ * });
  */
 async function process_payment(payment) {
   // Implementation
 }
 ```
 
-- Generate API documentation using tools like JSDoc or TypeDoc
+- Use JSDoc to document:
+  - Function parameters with types and descriptions
+  - Return values with types and descriptions
+  - Exceptions/errors that might be thrown
+  - Examples of usage for complex functions
+  - Edge cases or special considerations
+  - References to related functions or documentation
 - Document non-obvious code sections with inline comments that explain "why" not "what"
-- Include examples for complex functions or usage patterns
+- Generate reference documentation using JSDoc for API documentation
 
 ## 🗂 Git & Collaboration
 
@@ -375,3 +414,53 @@ We recommend:
   - `logs/`, `*.log`
   - `.env`, `.DS_Store`
   - `dist/` or `build/`
+
+## 🚀 Development Workflow
+
+> **AI Assistant Guidance**: When advising on development approaches, prioritize this step-by-step workflow that emphasizes thorough planning and testing before implementation.
+
+We recommend a systematic development workflow that follows these sequential phases:
+
+### 1. Project Planning
+
+- Start every project or feature with a comprehensive markdown plan document
+- The plan should detail all steps, requirements, and expected functionalities
+- Document all edge cases and potential challenges before writing any code
+- Seek approval on the plan before proceeding to implementation
+
+### 2. Documentation-First Development
+
+- After the plan is approved, implement documentation for all intended features
+- Document APIs, functions, and components before they exist
+- Ensure the documentation provides sufficient detail for users to understand how to use the feature
+- Review and refine documentation before moving to the test phase
+
+### 3. Test-Driven Development
+
+- Create comprehensive tests based on the documentation
+- Tests should cover all functionality described in the documentation, including edge cases
+- Tests should initially fail since the implementation doesn't exist yet
+- Use the test failures to guide the implementation phase
+
+### 4. Implementation
+
+- Develop the source code with the goal of making all tests pass
+- Focus on implementing the requirements exactly as specified in the documentation
+- Refactor code for clarity and performance while maintaining test coverage
+- Consider the implementation complete when all tests pass
+
+This cycle should be repeated for each logical component or feature in the project, leading to well-planned, thoroughly documented, and properly tested code.
+
+## 📖 Additional Resources and References
+
+> **AI Assistant Guidance**: When providing additional resources, refer to these repository documents for supplementary guidance on review practices, metrics, and workflows.
+
+### Repository References
+
+- [Review Guidelines](../REVIEW_GUIDELINES.md) - Comprehensive guidelines for AI agent reviewers, including principles and checklists
+- [Metrics Guide](../METRICS.md) - Framework for measuring and evaluating review quality improvements
+- [Review Checklist](../templates/review-checklist.md) - Practical checklist template for systematic reviews
+- [Usage Guide](../USAGE_GUIDE.md) - Implementation guidance for teams of AI agents performing reviews
+- [Contributing Guidelines](../CONTRIBUTING.md) - Standards for contributing to the project
+
+These resources complement the opinionated project guidelines in this document and provide additional context for effective development and review practices within the Aligna framework.
