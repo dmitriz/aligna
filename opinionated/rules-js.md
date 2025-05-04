@@ -94,7 +94,7 @@ Directory nesting should be limited to a maximum of 3 levels to maintain a navig
 ### Secrets Management
 
 - Store secrets in a dedicated `.secrets/` directory (never committed)
-- **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment. 
+- **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment.
 It is acknowledged that in some deployment scenarios, such as containerized environments, using .secrets/ directories for managing secrets may not be the most practical approach.
 
 - Use JavaScript configuration files (`.js`) that export configuration objects
