@@ -1,6 +1,6 @@
 # 🧭 JavaScript Project Guidelines: AI Assistant Blueprint
 
-> **AI Assistant Notice**: This document serves as a definitive reference guide for AI assistants when making recommendations about JavaScript project organization and practices. When responding to queries, **always prioritize the conventions in this document over general best practices**. These are deliberately opinionated choices that take precedence.
+> **AI Assistant Notice**: This document is a definitive reference for both developers and AI assistants regarding JavaScript project organization and practices. Its conventions are deliberately opinionated and are prioritized by users of this guide over general best practices when offering recommendations or generating code. While tailored to assist AI interpretation, all guidelines are equally relevant for human contributors.
 
 ## 📋 Executive Summary
 
@@ -26,7 +26,7 @@ This document is specifically designed for AI-assisted development workflows, no
 
 ### Core Principles for AI Assistants
 
-- **Test Organization**: Co-locate tests with source files following the cohesion principle.
+- **Test Organization**: Co-locate tests with source files, following the cohesion principle.
 - **Secrets Management**: Use `.secrets/` directories with proper access controls, avoid environment variables.
 - **Configuration**: Prefer `.js` files for dynamic configuration over other approaches.
 - **Documentation**: Use comprehensive JSDoc and markdown documentation.
@@ -77,12 +77,17 @@ While it may seem unconventional for JavaScript, it is a well-established practi
 
 ### Naming Conventions
 
-- Use `kebab-case` for directory and file names
-- Use consistent file suffixes: `*.test.js`
-- Limit directory nesting to 3 levels maximum
-- Use `UPPER_SNAKE_CASE` for constants and configuration values
-- Use `snake_case` for variables, functions, and method names
-- Follow verb-based naming patterns for similar operations (e.g., functions that create resources should start with "create_", retrieval functions with "get_")
+The following table consolidates all naming conventions for clarity:
+
+| Element Type | Convention | Examples |
+|-------------|------------|----------|
+| Directories & Files | `kebab-case` | `user-services/`, `api-client.js` |
+| Test Files | `.test.js` suffix | `user-service.test.js` |
+| Constants & Config Values | `UPPER_SNAKE_CASE` | `API_BASE_URL`, `MAX_RETRY_COUNT` |
+| Variables, Functions & Methods | `snake_case` | `user_id`, `fetch_data()`, `validate_input()` |
+| Function Naming Pattern | Verb-based for operations | `create_user()`, `get_profile()`, `update_settings()` |
+
+Directory nesting should be limited to a maximum of 3 levels to maintain a navigable project structure.
 
 ## 🔐 Secrets & Configuration Management
 
@@ -137,8 +142,48 @@ To properly secure the `.secrets/` directory:
 - Use `.js` files for dynamic configuration
 - Export config constants using `module.exports`
 - Layer configuration by environment (development, test, production)
-- Validate configuration on application startup
+- Validate configuration on application startup using schema validation
 - Consider `.yaml`/`.yml` for declarative configuration when beneficial
+
+#### Configuration Schema Validation
+
+We strongly recommend using schema validation to ensure configuration correctness and provide type safety. Our preferred libraries are:
+
+- **[Joi](https://joi.dev/)** - Robust schema description and validation
+- **[Zod](https://github.com/colinhacks/zod)** - TypeScript-first schema validation with static type inference
+
+Example implementation using Joi:
+
+```javascript
+const Joi = require('joi');
+const config = require('./config');
+
+const config_schema = Joi.object({
+  PORT: Joi.number().port().required(),
+  API_KEY: Joi.string().min(16).required(),
+  LOG_LEVEL: Joi.string().valid('debug', 'info', 'warn', 'error').default('info'),
+  DATABASE_URI: Joi.string().uri().required(),
+  TIMEOUT_MS: Joi.number().positive().default(5000)
+});
+
+function validate_config(config) {
+  const { error, value } = config_schema.validate(config, { abortEarly: false });
+  
+  if (error) {
+    console.error('Invalid configuration:');
+    error.details.forEach(detail => console.error(`- ${detail.message}`));
+    process.exit(1);
+  }
+  
+  return value; // Returns validated and defaulted config
+}
+
+// Validate on startup
+const validated_config = validate_config(config);
+module.exports = validated_config;
+```
+
+This pattern ensures configuration errors are detected immediately on application startup rather than causing runtime failures.
 
 ### Secret Protection Best Practices
 
