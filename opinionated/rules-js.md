@@ -217,11 +217,8 @@ While the flat test structure is the default recommendation and the preferred ch
 
 ### Test-Driven Development Process
 
-1. **Documentation-First**: Create detailed specifications before any tests.
-   - Extract function signatures, parameter types, and return types.
-   - Convert examples to test cases.
-   - Create tests for edge cases and error conditions.
-2. **Implementation**: Make the tests pass with minimal code
+1. **Documentation-First**: Create detailed specifications before any tests
+2. **Deterministic Test Creation**:
    - Extract function signatures, `parameter types`, and `return types`
 
 Tests must verify:
