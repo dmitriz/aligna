@@ -493,17 +493,165 @@ We recommend a systematic development workflow that follows these sequential pha
 
 ### 2. Documentation-First Development
 
+> **Critical Process**: This phase establishes the precise contract that the implementation must fulfill. The quality and completeness of this documentation directly determines test quality and implementation correctness.
+
 - After the plan is approved, implement documentation for all intended features
 - Document APIs, functions, and components before they exist
 - Ensure the documentation provides sufficient detail for users to understand how to use the feature
 - Review and refine documentation before moving to the test phase
 
+#### Effective Documentation Requirements
+
+Documentation must be:
+
+- **Complete**: Cover all behaviors including edge cases, errors, and success paths
+- **Precise**: Specify exact input/output relationships, not vague descriptions
+- **Testable**: Include concrete examples that can be directly translated to test assertions
+- **Deterministic**: Provide only one possible interpretation of the expected behavior
+
+#### Documentation Format for AI-Assisted Development
+
+For optimal AI assistance, documentation should contain structured elements that support direct test generation:
+
+```javascript
+/**
+ * Validates a user's credentials against the database
+ * 
+ * @function authenticate
+ * @param {Object} credentials - The user credentials
+ * @param {string} credentials.username - Must be 3-20 alphanumeric characters
+ * @param {string} credentials.password - Must be at least 8 characters
+ * 
+ * @returns {Promise<Object>} Authentication result object
+ * @returns {boolean} result.success - Whether authentication succeeded
+ * @returns {string} result.token - JWT token (only when success=true)
+ * @returns {string} result.message - Error message (only when success=false)
+ * 
+ * @throws {ValidationError} When credentials are improperly formatted
+ * @throws {DatabaseError} When database connection fails
+ * 
+ * @example
+ * // Success case
+ * const result = await authenticate({
+ *   username: 'john_doe',
+ *   password: 'secure_password123'
+ * });
+ * // result = { success: true, token: 'eyJhbGciO...' }
+ * 
+ * @example
+ * // Failure case
+ * const result = await authenticate({
+ *   username: 'john_doe',
+ *   password: 'wrong'
+ * });
+ * // result = { success: false, message: 'Invalid credentials' }
+ * 
+ * @boundary_cases
+ * 1. Empty credentials - Should throw ValidationError
+ * 2. Username with special characters - Should throw ValidationError
+ * 3. Database offline - Should throw DatabaseError
+ * 4. Rate limiting after 5 failed attempts - Should return {success: false, message: 'Too many attempts'}
+ */
+```
+
 ### 3. Test-Driven Development
 
-- Create comprehensive tests based on the documentation
+> **Deterministic Transformation**: Tests should be mechanically derived from documentation, capturing all specified behaviors without introducing new assumptions.
+
+- Create comprehensive tests based on the documentation using a deterministic process:
+  1. Extract all function signatures, parameter types, and return types
+  2. Convert all examples directly into test cases
+  3. Create tests for every documented edge case and error condition
+  4. Ensure every documented behavior has a corresponding test assertion
 - Tests should cover all functionality described in the documentation, including edge cases
 - Tests should initially fail since the implementation doesn't exist yet
 - Use the test failures to guide the implementation phase
+
+#### Test Coverage Requirements
+
+Tests must verify:
+- All documented function paths (success and error)
+- All boundary conditions and edge cases
+- All examples provided in the documentation
+- All exception/error conditions
+- Performance requirements (if specified)
+
+#### Example of Documentation-to-Test Transformation
+
+For the example above, tests would be mechanically derived:
+
+```javascript
+// authenticate.test.js
+const { authenticate } = require('./authenticate');
+const { ValidationError, DatabaseError } = require('./errors');
+
+it('returns success and token for valid credentials', async () => {
+  // Directly from @example section
+  const result = await authenticate({
+    username: 'john_doe',
+    password: 'secure_password123'
+  });
+  
+  expect(result.success).toBe(true);
+  expect(typeof result.token).toBe('string');
+  expect(result.token.length).toBeGreaterThan(0);
+});
+
+it('returns failure for invalid credentials', async () => {
+  // Directly from @example section
+  const result = await authenticate({
+    username: 'john_doe',
+    password: 'wrong'
+  });
+  
+  expect(result.success).toBe(false);
+  expect(result.message).toBe('Invalid credentials');
+});
+
+// From @boundary_cases section
+it('throws ValidationError for empty credentials', async () => {
+  await expect(authenticate({}))
+    .rejects.toThrow(ValidationError);
+});
+
+it('throws ValidationError for username with special characters', async () => {
+  await expect(authenticate({
+    username: 'john@doe',
+    password: 'secure_password123'
+  })).rejects.toThrow(ValidationError);
+});
+
+// Additional test for database connection issues
+it('throws DatabaseError when database is offline', async () => {
+  // Mock database connection failure
+  mockDatabaseConnection.mockReturnValueOnce(Promise.reject(new Error('Connection failed')));
+  
+  await expect(authenticate({
+    username: 'john_doe',
+    password: 'secure_password123'
+  })).rejects.toThrow(DatabaseError);
+});
+
+// Test for rate limiting after multiple failures
+it('returns rate limiting message after 5 failed attempts', async () => {
+  // Set up multiple failed attempts
+  for (let i = 0; i < 5; i++) {
+    await authenticate({
+      username: 'john_doe',
+      password: 'wrong' + i
+    });
+  }
+  
+  // Test the rate limiting behavior
+  const result = await authenticate({
+    username: 'john_doe',
+    password: 'wrong_again'
+  });
+  
+  expect(result.success).toBe(false);
+  expect(result.message).toBe('Too many attempts');
+});
+```
 
 ### 4. Implementation
 
