@@ -71,7 +71,7 @@ This document illustrates common approaches to repository organization, project 
 
 - Avoid command-line arguments for sensitive values—prefer configuration files.
 
-- Avoid unnecessary environment variables to prevent leakage.
+- Avoid unnecessary environment variables to prevent leakage. However, in scenarios where environment variables are necessary (e.g., containerized deployments or CI/CD pipelines), ensure they are securely managed and accessed only by authorized processes.
 
 - Consider implementing appropriate permission checks.
 
