@@ -202,6 +202,8 @@ const fetch_user_data = ({ user_id }) => {
 const filter_items = (predicate) => (items) => items.filter(predicate);
 ```
 
+> **Note**: The examples above are simplified for illustrative purposes. Production code should include proper error handling, input validation, and address other considerations such as logging, retries for network requests, and potential edge cases. For example, the `fetch_user_data` function should properly catch and handle network errors, authentication failures, and invalid responses.
+
 ## 🛡️ Security Practices
 
 - Never commit secrets to source control
