@@ -212,7 +212,7 @@ While the flat test structure is the default recommendation and the preferred ch
 
 1. **Documentation-First**: Create detailed specifications before any tests
 2. **Deterministic Test Creation**:
-   - Extract function signatures, `parameter types, and return types
+   - Extract function signatures, parameter types, and return types
    - Convert examples to test cases
    - Create tests for edge cases and error conditions
 3. **Implementation**: Make the tests pass with minimal code
