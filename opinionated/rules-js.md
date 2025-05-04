@@ -141,11 +141,15 @@ We recommend using **Jest** for testing with these opinionated approaches:
 - **Name test files consistently** - Use `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
 - **Write pure functions** to simplify testing
 
+### Flat Test Structure vs. `describe` Blocks
+
+While the flat test structure is the default recommendation and the preferred choice of this guide for simplicity and readability, it is acknoledged that `describe` blocks can be beneficial for more complex test suites. It is, however, the intent of this guide to discourage from such complex scenarios in first place, replacing them instead with separate more focused test cases.
+
 ### Test-Driven Development Process
 
 1. **Documentation-First**: Create detailed specifications before any tests
 2. **Deterministic Test Creation**:
-   - Extract function signatures, parameter types, and return types
+   - Extract function signatures, `parameter types, and return types
    - Convert examples to test cases
    - Create tests for edge cases and error conditions
 3. **Implementation**: Make the tests pass with minimal code
