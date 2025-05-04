@@ -95,7 +95,7 @@ Directory nesting should be limited to a maximum of 3 levels to maintain a navig
 
 - Store secrets in a dedicated `.secrets/` directory (never committed)
 - **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment.
-It is acknowledged that in some deployment scenarios, such as containerized environments, using `.secrets/` directories for managing secrets may not be the most practical approach.
+In containerized or similar environments where `.secrets/` directories are impractical, implement alternative secure mechanisms (e.g., Docker secrets, encrypted environment variables, or dedicated secret management services) to protect sensitive data.
 
 - Use JavaScript configuration files (`.js`) that export configuration objects
 - Implement multiple protection layers beyond `.gitignore`:
