@@ -57,7 +57,7 @@ The following decisions have been **carefully considered** and are **not open fo
 2. **Handle Environment Variables for Secrets Securely** - While environment variables are common in cloud-native deployments, they must be handled with care to avoid exposing secrets to the entire process environment. Recommended practices include integrating with secret management tools (e.g., HashiCorp Vault, AWS Secrets Manager), using runtime encryption, and enforcing strict linting to detect potential leaks.
 
 3. **Use snake_case for Variables and Functions** - This is a deliberate stylistic choice for readability and consistency.
-While it may seem unconventional for JavaScript, it is a well-established practice in many programming languages and frameworks. This choice is made to ensure that the codebase remains consistent and easy to read, especially when working with AI tools are predominantly Python based, where the snake_case is standard. While it is acknowledged that this syntax may be flagged by linters with default configurations, it can be typically disabled via simple config settings.
+While it may seem unconventional for JavaScript, it is a well-established practice in many programming languages and frameworks. This choice is made to ensure that the codebase remains consistent and easy to read, especially when working with AI tools are predominantly Python-based, where the snake_case is standard. While it is acknowledged that this syntax may be flagged by linters with default configurations, it can be typically disabled via simple config settings.
 
 4. **Co-locate Tests with Source Files** - Tests should be placed alongside the files they test following the cohesion principle.
 
@@ -95,13 +95,13 @@ Directory nesting should be limited to a maximum of 3 levels to maintain a navig
 
 - Store secrets in a dedicated `.secrets/` directory (never committed)
 - **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment.
-It is acknowledged that in some deployment scenarios, such as containerized environments, using .secrets/ directories for managing secrets may not be the most practical approach.
+It is acknowledged that in some deployment scenarios, such as containerized environments, using `.secrets/` directories for managing secrets may not be the most practical approach.
 
 - Use JavaScript configuration files (`.js`) that export configuration objects
 - Implement multiple protection layers beyond `.gitignore`:
-- Pre-commit hooks to prevent accidental secret commits
-- Git-secrets to detect high-entropy strings
-- Regular audits of Git history
+- Pre-commit hooks to prevent accidental secret commits.
+- Git-secrets to detect high-entropy strings.
+- Regular audits of Git history.
 
 #### `.secrets/` Directory Access Controls Implementation
 
@@ -113,7 +113,7 @@ To properly secure the `.secrets/` directory:
    - For secret files: `chmod 600 .secrets/*` (owner read/write only)
 
 2. **Encryption at Rest**:
-   - Implement transparent file encryption using tools like `fscrypt` or LUKS
+   - Implement transparent file encryption using tools like `fscrypt` or `LUKS`
    - Store encryption keys separately from the workspace (e.g., secure hardware token)
    - Consider solutions like git-crypt for teams requiring controlled access
 
@@ -252,7 +252,9 @@ We explicitly prefer functional programming patterns:
 - **Use arrow functions** for cleaner syntax and implicit returns
 - **Avoid classes** in favor of function composition
 
-> **On Avoiding Classes**: This preference for functional composition over classes is a deliberate architectural decision. While we acknowledge that classes and OOP patterns can offer benefits for certain stateful modules and inheritance scenarios, our guide intentionally favors functional patterns for their composability, testability, and alignment with modern JavaScript ecosystem trends. This choice has been extensively evaluated like our choice of CommonJS, we ask reviewers to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
+> **On Avoiding Classes**: This preference for functional composition over classes is a deliberate architectural decision. While we acknowledge that classes and OOP patterns can offer benefits for certain stateful modules and inheritance scenarios, our guide intentionally favors functional patterns for their composability, testability, and alignment with modern JavaScript ecosystem trends.
+
+This choice has been extensively evaluated like our choice of CommonJS. We ask reviewers to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
 
 - **Use pure functions** that can be tested in isolation
 - **Use single-object parameters** for flexible interfaces
@@ -360,7 +362,9 @@ This streamlining improves readability while retaining essential information.
 
 This project uses CommonJS (CJS) by deliberate and opinionated design. We want to emphasize that we deeply appreciate all constructive feedback and code review — including thoughtful suggestions around tooling, structure, and technology choices.
 
-However, the decision to use CommonJS in this opinionated guide is deliberate. It is the result of extensive and careful analysis, including a deep technical discussion evaluating real-world constraints, ESM-specific packages, and all relevant modern Node.js features. Every concrete challenge raised — from streaming to HTTP clients to native fetch support — has been fully addressed within CommonJS in a stable, testable, and maintainable way.
+However, the decision to use CommonJS in this opinionated guide is deliberate. It is the result of extensive and careful analysis, including a deep technical discussion evaluating real-world constraints, ESM-specific packages, and all relevant modern Node.js features.
+
+In the context of small agile projects with small teams assisted by AI, concrete challenges raised — from streaming to HTTP clients to native fetch support — have been addressed within CommonJS in a stable, testable, and maintainable way.
 
 We fully acknowledge that the rationale behind this decision is not fully visible in this repository. Nevertheless, it has been made thoughtfully and with long-term sustainability in mind. Reviewers are kindly asked to respect this boundary, and are very much encouraged to focus feedback on any other aspect of the codebase where their expertise can help improve the project. We’re grateful for that.
 
