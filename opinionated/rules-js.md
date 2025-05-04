@@ -103,16 +103,14 @@ function get_database() {}
 }
 ```
 
-### Secret Access Patterns
-
-- Create a dedicated secrets utility module with type-safe access methods
-
 ### Environment Integration
 
 - For cloud environments, use platform-native secret management:
   - AWS: AWS Secrets Manager for rotation support, Parameter Store for cost-efficiency
   - Azure: Key Vault with managed identities for authentication
   - GCP: Secret Manager with IAM for fine-grained access control
+- For local development, use secrets files for simplicity.
+- For production environments, prefer environment variables for runtime secrets as they are better suited for containerized environments and CI/CD systems.
 
 ### Secret Protection Best Practices
 

@@ -54,3 +54,16 @@ We address gaps such as:
 - Cross-domain application (works for code, docs, and research papers)
 
 ---
+
+## 📋 Project Guidelines
+
+This repository contains a set of highly opinionated JavaScript project guidelines covering:
+
+- Repository organization 
+- Code structure
+- Configuration management
+- Security practices
+- Testing approaches
+- Documentation standards
+
+These guidelines are provided for informational purposes only and can be found in our [JavaScript Project Guidelines](opinionated/rules-js.md) document.
