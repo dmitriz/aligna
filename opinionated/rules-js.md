@@ -187,7 +187,6 @@ We recommend:
 - Store secrets in a dedicated `.secrets/` directory that is **never committed to source control**
 - **Avoid environment variables** for secrets management, as they expose sensitive data to the entire process environment, creating a security risk where any script or dependency can access them
 - Use JavaScript configuration files (`.js`) that export configuration objects as the preferred solution for secrets management in local development and non-containerized environments, as they allow for proper access controls.
-- For production environments, where secrets need to be injected dynamically (e.g., in containerized or CI/CD systems), prefer environment variables with strict access controls and runtime-only exposure.
 - Only accept third-party JSON configuration files when modifying them is not an option; otherwise, JavaScript files are preferred
 - Implement multiple layers of protection beyond `.gitignore`:
   - Add pre-commit hooks with Husky to prevent accidental secret commits
@@ -214,7 +213,6 @@ module.exports = {
   - Azure: Key Vault with managed identities for authentication
   - GCP: Secret Manager with IAM for fine-grained access control
 - For local development, use secrets files for simplicity.
-- For production environments, prefer environment variables for runtime secrets as they are better suited for containerized environments and CI/CD systems.
 
 ### Secret Protection Best Practices
 
