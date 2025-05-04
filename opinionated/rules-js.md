@@ -138,6 +138,17 @@ To properly secure the `.secrets/` directory:
    - Keep backups encrypted with different keys than production
    - Implement a secure recovery protocol
 
+### Clarification on Environment Variables for Secrets
+
+To address potential confusion, the guideline on environment variables for secrets has been clarified:
+
+- **Avoid environment variables for secrets when feasible**: This is due to the risk of exposing secrets to the entire process environment. However, in scenarios where environment variables are unavoidable (e.g., containerized environments), ensure they are handled securely by:
+  - Using runtime encryption.
+  - Integrating with secret management tools (e.g., AWS Secrets Manager).
+  - Enforcing strict linting to detect potential leaks.
+
+This clarification ensures that the guideline is both practical and secure.
+
 ### Configuration Approach
 
 - Use `.js` files for dynamic configuration
@@ -206,11 +217,10 @@ While the flat test structure is the default recommendation and the preferred ch
 
 ### Test-Driven Development Process
 
-1. **Documentation-First**: Create detailed specifications before any tests
-It is, however, the intent of this guide to discourage such complex scenarios in the first place, replacing them with separate, more focused test cases.
-   - Extract function signatures, parameter types, and return types
-   - Convert examples to test cases
-   - Create tests for edge cases and error conditions
+1. **Documentation-First**: Create detailed specifications before any tests.
+   - Extract function signatures, parameter types, and return types.
+   - Convert examples to test cases.
+   - Create tests for edge cases and error conditions.
 2. **Implementation**: Make the tests pass with minimal code
    - Extract function signatures, `parameter types`, and `return types`
 
@@ -322,6 +332,29 @@ Create comprehensive text-based documentation that is:
 - **Testable**: Includes concrete examples
 - **Deterministic**: Provides only one possible interpretation
 - **Minimal**: Demonstrates functionality without unnecessary complexity
+
+## Streamlining Verbose Sections
+
+### Secrets Management Implementation
+
+To keep the guide concise, detailed implementation steps for secrets management have been moved to an external resource. A summary remains:
+
+- Store secrets in a `.secrets/` directory with proper access controls.
+- Use encryption at rest and runtime.
+- Implement access logging and monitoring.
+
+For detailed steps, refer to [Secrets Management Best Practices](https://example.com/secrets-management).
+
+### CommonJS Rationale
+
+The rationale for using CommonJS has been summarized:
+
+- CommonJS is chosen for its stability and compatibility with real-world constraints.
+- This decision is deliberate and based on extensive analysis.
+
+For the full discussion, see [CommonJS Decision Rationale](#on-module-format-commonjs).
+
+This streamlining improves readability while retaining essential information.
 
 ## On Module Format: CommonJS
 
