@@ -190,7 +190,7 @@ We recommend:
 // Example of a simple secrets configuration file
 module.exports = {
   API_KEY: "[REQUIRED] Access key",
-  SERVICE_URL: "[REQUIRED] Service endpoint"
+  API_SECRET: "[REQUIRED] Secret key"
 };
 ```
 
