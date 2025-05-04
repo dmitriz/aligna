@@ -124,6 +124,7 @@ To properly secure the `.secrets/` directory:
 
 4. **Runtime Access Controls**:
    - Load secrets into memory only when needed
+   - Ensure secret loading and clearing operations are concurrency-safe by using atomic operations or locks as needed
    - Implement in-memory encryption with keys derived at runtime
    - Clear secrets from memory after use using secure memory wiping
 
@@ -159,20 +160,15 @@ const Joi = require('joi');
 const config = require('./config');
 
 const config_schema = Joi.object({
-  PORT: Joi.number().port().required(),
   API_KEY: Joi.string().min(16).required(),
-  LOG_LEVEL: Joi.string().valid('debug', 'info', 'warn', 'error').default('info'),
-  DATABASE_URI: Joi.string().uri().required(),
-  TIMEOUT_MS: Joi.number().positive().default(5000)
+  LOG_LEVEL: Joi.string().valid('debug', 'info').default('info'),
 });
 
 function validate_config(config) {
   const { error, value } = config_schema.validate(config, { abortEarly: false });
   
   if (error) {
-    console.error('Invalid configuration:');
-    error.details.forEach(detail => console.error(`- ${detail.message}`));
-    process.exit(1);
+    ...
   }
   
   return value; // Returns validated and defaulted config
@@ -211,12 +207,12 @@ While the flat test structure is the default recommendation and the preferred ch
 ### Test-Driven Development Process
 
 1. **Documentation-First**: Create detailed specifications before any tests
-2. **Deterministic Test Creation**:
+It is, however, the intent of this guide to discourage such complex scenarios in the first place, replacing them with separate, more focused test cases.
    - Extract function signatures, parameter types, and return types
    - Convert examples to test cases
    - Create tests for edge cases and error conditions
-3. **Implementation**: Make the tests pass with minimal code
-4. **Refactor**: Improve code while maintaining test coverage
+2. **Implementation**: Make the tests pass with minimal code
+   - Extract function signatures, `parameter types`, and `return types`
 
 Tests must verify:
 
