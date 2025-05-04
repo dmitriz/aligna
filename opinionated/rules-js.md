@@ -36,9 +36,10 @@ The following decisions have been **carefully considered** and are **not open fo
 
 1. **Use CommonJS over ES Modules** - CommonJS is natively supported while ES Modules often require additional tooling.
 
-2. **Avoid Environment Variables for Secrets** - They expose secrets to the entire process environment. Use configuration files with proper access controls instead.
+2. **Handle Environment Variables for Secrets Securely** - While environment variables are common in cloud-native deployments, they must be handled with care to avoid exposing secrets to the entire process environment. Recommended practices include integrating with secret management tools (e.g., HashiCorp Vault, AWS Secrets Manager), using runtime encryption, and enforcing strict linting to detect potential leaks.
 
 3. **Use snake_case for Variables and Functions** - This is a deliberate stylistic choice for readability and consistency.
+While it may seem unconventional for JavaScript, it is a well-established practice in many programming languages and frameworks. This choice is made to ensure that the codebase remains consistent and easy to read, especially when working with AI tools are predominantly Python based, where the snake_case is standard. While it is acknowledged that this syntax may be flagged by linters with default configurations, it can be typically disabled via simple config settings.
 
 4. **Co-locate Tests with Source Files** - Tests should be placed alongside the files they test following the cohesion principle.
 
