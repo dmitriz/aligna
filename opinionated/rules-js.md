@@ -4,7 +4,7 @@
 
 ## 📋 Executive Summary
 
-This guide provides an opinionated approach to JavaScript development optimized for AI-assisted workflows. It prioritizes clear documentation, functional programming patterns, co-located tests, secure configuration management, and CommonJS modules.
+This guide provides an opinionated approach to JavaScript development optimized for AI-assisted workflows. It prioritizes clear documentation, functional programming patterns, co-located tests, secure configuration management, robust secrets handling, and CommonJS modules.
 
 ## 📑 Table of Contents
 
@@ -14,7 +14,7 @@ This guide provides an opinionated approach to JavaScript development optimized 
 - [🔐 Secrets & Configuration Management](#-secrets--configuration-management)
 - [🧪 Testing Framework](#-testing-framework)
 - [🧾 Code Conventions](#-code-conventions)
-- [🛡️ Security Practices](#️-security-practices)
+- [🛡️ Security Practices](#-security-practices)
 - [📚 Documentation Standards](#-documentation-standards)
 - [🚀 Development Workflow](#-development-workflow)
 - [On Module Format: CommonJS](#on-module-format-commonjs)
@@ -98,7 +98,7 @@ Directory nesting should be limited to a maximum of 3 levels to maintain a navig
 In containerized or similar environments where `.secrets/` directories are impractical, implement alternative secure mechanisms (e.g., Docker secrets, encrypted environment variables, or dedicated secret management services) to protect sensitive data.
 
 - Use JavaScript configuration files (`.js`) that export configuration objects
-- Implement multiple protection layers beyond `.gitignore`:
+- To implement multiple protection layers beyond `.gitignore`:
 - Pre-commit hooks to prevent accidental secret commits.
 - Git-secrets to detect high-entropy strings.
 - Regular audits of Git history.
@@ -126,6 +126,7 @@ To properly secure the `.secrets/` directory:
    - Load secrets into memory only when needed
    - Ensure secret loading and clearing operations are concurrency-safe by using atomic operations or locks as needed
    - Implement in-memory encryption with keys derived at runtime
+   - Clear secrets from memory after use using secure memory wiping
    - Clear secrets from memory after use using secure memory wiping
 
 5. **Automated Monitoring**:
@@ -190,7 +191,7 @@ const validated_config = validate_config(config);
 module.exports = validated_config;
 ```
 
-This pattern ensures configuration errors are detected immediately on application startup rather than causing runtime failures.
+This pattern ensures configuration errors are detected immediately on application startup, rather than causing runtime failures.
 
 ### Secret Protection Best Practices
 
@@ -251,7 +252,7 @@ We explicitly prefer functional programming patterns:
 
 > **On Avoiding Classes**: This preference for functional composition over classes is a deliberate architectural decision. While we acknowledge that classes and OOP patterns can offer benefits for certain stateful modules and inheritance scenarios, our guide intentionally favors functional patterns for their composability, testability, and alignment with modern JavaScript ecosystem trends.
 
-This choice has been extensively evaluated like our choice of CommonJS. We ask reviewers to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
+This choice has been extensively evaluated like our choice of CommonJS. We ask reviewers, to respect this fundamental architectural decision and focus their attention on other aspects where their expertise can enhance the project. The functional approach remains a cornerstone of this guide's philosophy.
 
 - **Use pure functions** that can be tested in isolation
 - **Use single-object parameters** for flexible interfaces

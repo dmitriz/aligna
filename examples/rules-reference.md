@@ -10,7 +10,7 @@ This document illustrates common approaches to repository organization, project 
 
 - Place reusable, testable code modules in a source directory (e.g., `src/`, `lib/`).
 
-- Store configuration files containing sensitive data in a secure, non-committed directory.
+- Store configuration files containing sensitive data in a secure, non-committed directory (e.g., `.secrets/`) and ensure it is added to `.gitignore`.
 
 - Add a `docs/` directory for architectural diagrams, API references, and guides.
 
@@ -26,6 +26,8 @@ This document illustrates common approaches to repository organization, project 
 
 - For production environments, use environment variables for runtime secrets.
 
+- See also: [Detailed Secrets Management Guide](../opinionated/rules-js.md#-secrets--configuration-management) for comprehensive workflow and implementation details.
+
 - WARNING: Never commit secrets to version control history. Consider using a dedicated secrets manager service for production environments.
 
 ## ⚙️ Configuration
@@ -35,6 +37,8 @@ This document illustrates common approaches to repository organization, project 
 - Consider structured formats like YAML or JSON for declarative configuration.
 
 - Layer configuration by environment (development, test, production).
+
+- Implement schema validation (e.g., with libraries like Joi/Zod) to catch configuration errors early in the application lifecycle.
 
 ## 🧪 Testing
 
@@ -73,6 +77,12 @@ This document illustrates common approaches to repository organization, project 
 
 - Avoid unnecessary environment variables to prevent leakage. However, in scenarios where environment variables are necessary (e.g., containerized deployments or CI/CD pipelines), ensure they are securely managed and accessed only by authorized processes.
 
+- Avoid environment variables for sensitive data except when truly necessary. Environment variables should be considered "necessary" only when:
+  - Required by third-party services/platforms that don't support other methods
+  - Needed in containerized/serverless environments where filesystem access is limited
+  - Mandated by organizational policies or deployment platforms
+  In all other scenarios, prefer more secure alternatives like dedicated secret managers.
+
 - Consider implementing appropriate permission checks.
 
 ## 📚 Documentation
@@ -87,7 +97,7 @@ This document illustrates common approaches to repository organization, project 
 
 - Use feature branches with a clear naming convention.
 
-- Follow consistent commit message conventions.
+- Follow consistent commit message conventions (e.g., [Conventional Commits](https://www.conventionalcommits.org/) or as specified in your project's [CONTRIBUTING.md](../CONTRIBUTING.md)).
 
 - Keep pull requests focused and small.
 
