@@ -1,6 +1,8 @@
 # 🧭 Project Guidelines Template
 
-This document outlines best practices for repository organization, project structure, configuration, and secure development workflows.
+> **Note**: This is an illustrative example document showing how project guidelines might be structured. It is provided for reference purposes only and is not intended to prescribe universal best practices.
+
+This document illustrates common approaches to repository organization, project structure, configuration, and development workflows.
 
 ## 📁 Folder Structure
 
