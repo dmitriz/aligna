@@ -6,6 +6,18 @@ This document outlines recommended practices for repository organization, script
 
 ## 🤖 AI-Assisted Development Context
 
+### AI Assistant Guidance
+
+This document includes specific "AI Assistant Guidance" notes throughout. To streamline the document, all such guidance has been consolidated here:
+
+- **Test Organization**: Tests should be co-located with source files following the cohesion principle, not in a separate test directory.
+- **Secrets Management**: Prioritize `.secrets/` directories over environment variables for local development.
+- **Configuration**: Use `.js` files for dynamic configuration and avoid environment variables where possible.
+- **Documentation**: Emphasize comprehensive JSDoc and markdown documentation for clarity and maintainability.
+- **Functional Programming**: Prefer functional programming patterns, including arrow functions and function composition, over object-oriented approaches.
+
+Refer back to this section for general principles when encountering "AI Assistant Guidance" references in the document.
+
 > **CRUCIAL FOR REVIEWERS**: This document is specifically designed for AI-assisted development workflows, not traditional human-only teams. This fundamentally changes which practices are valuable and which are obsolete.
 
 ### The New Development Paradigm
@@ -153,7 +165,7 @@ function get_database() {}
 
 ### Testing Organization
 
-> **AI Assistant Guidance**: When advising on test organization, emphasize that tests should be co-located with source files following the cohesion principle, not in a separate test directory. This is a deliberate design decision.
+> **Refer to the "AI Assistant Guidance" section at the beginning of this document for general principles and recommendations.**
 
 - **Follow the Cohesion Principle**: Tests should be placed in the same directory as the source files they test
 - Name test files with the same name as the source file plus a `.test.js` suffix (e.g., `user_service.js` → `user_service.test.js`)
@@ -174,7 +186,8 @@ We recommend:
 
 - Store secrets in a dedicated `.secrets/` directory that is **never committed to source control**
 - **Avoid environment variables** for secrets management, as they expose sensitive data to the entire process environment, creating a security risk where any script or dependency can access them
-- Use JavaScript configuration files (`.js`) that export configuration objects as the preferred solution for secrets management, as they allow for proper access controls
+- Use JavaScript configuration files (`.js`) that export configuration objects as the preferred solution for secrets management in local development and non-containerized environments, as they allow for proper access controls.
+- For production environments, where secrets need to be injected dynamically (e.g., in containerized or CI/CD systems), prefer environment variables with strict access controls and runtime-only exposure.
 - Only accept third-party JSON configuration files when modifying them is not an option; otherwise, JavaScript files are preferred
 - Implement multiple layers of protection beyond `.gitignore`:
   - Add pre-commit hooks with Husky to prevent accidental secret commits
