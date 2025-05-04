@@ -4,6 +4,39 @@
 
 This document outlines recommended practices for repository organization, script structure, configuration, and secure development workflows. Rather than presenting universal best practices, these represent carefully considered choices to maintain consistency across projects following this guideline set.
 
+## 🤖 AI-Assisted Development Context
+
+> **CRUCIAL FOR REVIEWERS**: This document is specifically designed for AI-assisted development workflows, not traditional human-only teams. This fundamentally changes which practices are valuable and which are obsolete.
+
+### The New Development Paradigm
+
+Traditional software development best practices were established for human-only teams where coordination costs are high and cognitive load must be carefully managed across multiple people. With AI assistance, many of these constraints change dramatically:
+
+- **Documentation becomes executable** - AI can read, understand, and implement documentation directly
+- **Consistency becomes automatic** - AI can enforce patterns consistently without human error
+- **Cognitive load is shared** - Complex processes can be offloaded to AI, reducing the need for simplification
+- **Historical context is preserved** - AI can maintain awareness of decisions and rationale over time
+
+### Focus on AI-First, Small Team Context
+
+This ruleset prioritizes:
+
+1. **Practices that benefit AI understanding and implementation** - Clear patterns that AI can recognize and follow consistently
+2. **Solutions optimized for individual developers or small teams** - Not large-team coordination overhead
+3. **Minimal, resilient approaches** - Avoiding complex tooling that frequently breaks or requires maintenance
+4. **Evidence-based decisions** - Prioritizing proven solutions over trendy but untested approaches
+
+### Reevaluating "Best Practices"
+
+Many traditional "best practices" were solutions to human-specific problems that may no longer apply:
+
+- **Complex Git hooks tools (like Husky)** - Often unnecessary when simple git hooks scripts work reliably
+- **Team coordination patterns** - Less relevant for AI-assisted single developers
+- **Extensive boilerplate** - Can be generated instantly by AI when needed, not maintained manually
+- **Format enforcement tooling** - Often redundant with AI's ability to maintain consistent formatting
+
+When reviewing this document, evaluate recommendations through this AI-assisted development lens rather than applying traditional criteria from human-only team experiences.
+
 ## 🚨 Reviewer Guidelines: What We Value in Reviews
 
 > **IMPORTANT FOR ALL REVIEWERS (HUMAN AND AI)**: Please read this section carefully before providing any feedback. Our goal is to ensure review efforts are productive and focused on areas that add real value.
