@@ -1,14 +1,18 @@
 # GitHub Labels
 
+Standardizing labels in your GitHub repository helps streamline issue tracking and project management. This guide provides a comprehensive overview of label categories and their purposes.
+
 ## Table of Contents
+
 - [How to Apply Labels](#how-to-apply-labels)
 - [Priority](#priority)
 - [Type](#type)
 - [Status](#status)
 
 ## How to Apply Labels
-Labels can be managed under `Settings > Labels` in your GitHub repository.  
-Ensure these match the spelling and hex codes listed below to enable reliable automation.
+>
+> **Note:** Labels can be managed under `Settings > Labels` in your GitHub repository.  
+> Ensure these match the spelling and hex codes listed below to enable reliable automation.
 
 ## Priority
 
