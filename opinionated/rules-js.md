@@ -293,7 +293,7 @@ Tests must verify:
 - All exception/error conditions
 - Performance requirements (if specified)
 
-#### Comprehensive Test Types
+#### Comprehensive Test Categories
 
 For robust validation, implement tests at multiple levels:
 
@@ -304,7 +304,7 @@ For robust validation, implement tests at multiple levels:
 
 When behaviors span multiple systems, use contract tests to validate the interactions between components and end-to-end tests to validate real-world usage scenarios, not just isolated units.
 
-#### Human-Readable Output Validation
+#### Validating Human-Readable Output
 
 For output directed to human users, tests should validate:
 
@@ -357,18 +357,11 @@ We recommend:
 
 ### File Structure and Documentation
 
-- Begin each script with a comprehensive JSDoc header:
-
-```javascript
-/**
- * @fileoverview Database migration script to update user schemas
- * 
- * @usage node scripts/migrate-users.js
- * @requires ./config/database.js
- * @requires ./src/models/user.js
- */
-```
-
+- Begin each script with a comprehensive JSDoc header that explains:
+  - Purpose of the file
+  - Usage instructions
+  - Dependencies
+  - Configuration requirements
 - Place configuration imports at the top, followed by npm dependencies, then local imports
 
 ## 🛡️ Security Practices
@@ -456,11 +449,8 @@ We recommend:
 
 - Include:
   - `.secrets/`
-  - `secrets/`
   - `node_modules/`
-  - `logs/`, `*.log`
-  - `.env`, `.DS_Store`
-  - `dist/` or `build/`
+  - `logs/`
 
 ## 🚀 Development Workflow
 
@@ -477,16 +467,17 @@ We recommend a systematic development workflow that follows these sequential pha
 
 ### 2. Documentation-First Development
 
-> **Critical Process**: This phase establishes the precise contract that the implementation must fulfill. The quality and completeness of this documentation directly determines test quality and implementation correctness.
+> **Critical Process**: This phase establishes the precise contract that the implementation must fulfill through text-based documentation (not code). The quality and completeness of this documentation directly determines test quality and implementation correctness.
 
-- After the plan is approved, implement documentation for all intended features
-- Document APIs, functions, and components before they exist
-- Ensure the documentation provides sufficient detail for users to understand how to use the feature
-- Review and refine documentation before moving to the test phase
+- After the plan is approved, create comprehensive **text-based documentation** (typically Markdown) for all intended features
+- This documentation is completely separate from JSDoc and precedes any code
+- Document APIs, functions, behaviors, and business rules before they exist in code
+- Create detailed requirements, specifications, and expected behaviors in clear text form
+- Review and refine this text-based documentation before moving to the test phase
 
-#### Effective Documentation Requirements
+#### Effective Text-Based Documentation Requirements
 
-Documentation must be:
+Text documentation must be:
 
 - **Complete**: Cover all behaviors including edge cases, errors, and success paths
 - **Precise**: Specify exact input/output relationships, not vague descriptions
@@ -494,29 +485,42 @@ Documentation must be:
 - **Deterministic**: Provide only one possible interpretation of the expected behavior
 - **Minimal**: Examples should demonstrate only the specific functionality without unnecessary complexity
 
-#### Documentation Format for AI-Assisted Development
+#### Sample Text-Based Documentation Format
 
-For optimal AI assistance, documentation should contain structured elements that support direct test generation:
+```markdown
+## User Authentication Module
 
-```javascript
-/**
- * Verifies API access token is valid
- * 
- * @function verifyToken
- * @param {string} token - The access token to verify
- * 
- * @returns {Promise<Object>} Verification result
- * @returns {boolean} result.valid - Whether token is valid
- * @returns {Object} [result.claims] - Token claims when valid
- * 
- * @throws {Error} When token validation fails
- * 
- * @boundary_cases
- * 1. Empty token - Should throw Error
- * 2. Expired token - Should return {valid: false}
- * 3. Service unavailable - Should throw Error with specific message
- */
+### Purpose
+Provides secure authentication for users via OAuth providers (GitHub, Google).
+
+### Core Functions
+
+#### verifyToken(token)
+Verifies a provided access token's validity.
+
+**Inputs:**
+- token (string): OAuth access token
+
+**Returns:**
+- Object containing:
+  - valid (boolean): Whether token is valid
+  - claims (object, optional): Token payload when valid
+
+**Errors:**
+- Throws Error when token is invalid
+- Returns {valid: false} for expired tokens
+
+**Edge Cases:**
+1. Empty token - Should throw Error
+2. Token from unsupported provider - Should throw Error
+3. Service unavailable - Should throw Error with specific message
+
+**Example Usage:**
+For a valid token: Returns {valid: true, claims: {...}}
+For expired token: Returns {valid: false}
 ```
+
+This text-based documentation serves as the contract that all subsequent code must fulfill.
 
 ### 3. Test-Driven Development
 
