@@ -71,12 +71,48 @@ While it may seem unconventional for JavaScript, it is a well-established practi
 ### Secrets Management
 
 - Store secrets in a dedicated `.secrets/` directory (never committed)
-- **Avoid environment variables** for secrets management due to security risks
+- **Avoid environment variables** for secrets management when feasible due to security risks of exposing them to the entire process environment. 
+It is acknowledged that in some deployment scenarios, such as containerized environments, using .secrets/ directories for managing secrets may not be the most practical approach.
+
 - Use JavaScript configuration files (`.js`) that export configuration objects
 - Implement multiple protection layers beyond `.gitignore`:
-  - Pre-commit hooks to prevent accidental secret commits
-  - Git-secrets to detect high-entropy strings
-  - Regular audits of Git history
+- Pre-commit hooks to prevent accidental secret commits
+- Git-secrets to detect high-entropy strings
+- Regular audits of Git history
+
+#### `.secrets/` Directory Access Controls Implementation
+
+To properly secure the `.secrets/` directory:
+
+1. **File System Permissions**:
+   - Set restrictive Unix permissions: `chmod 700 .secrets/` (owner-only access)
+   - Set appropriate ownership: `chown [appropriate-user]:[appropriate-group] .secrets/`
+   - For secret files: `chmod 600 .secrets/*` (owner read/write only)
+
+2. **Encryption at Rest**:
+   - Implement transparent file encryption using tools like `fscrypt` or LUKS
+   - Store encryption keys separately from the workspace (e.g., secure hardware token)
+   - Consider solutions like git-crypt for teams requiring controlled access
+
+3. **Access Logging**:
+   - Implement an audit log for all read/write operations on secret files
+   - Log should capture: timestamp, user, action type, and file accessed
+   - Store logs securely and review them regularly
+
+4. **Runtime Access Controls**:
+   - Load secrets into memory only when needed
+   - Implement in-memory encryption with keys derived at runtime
+   - Clear secrets from memory after use using secure memory wiping
+
+5. **Automated Monitoring**:
+   - Set up notifications for unexpected access patterns
+   - Implement file integrity monitoring to detect unauthorized changes
+   - Schedule regular permission verification to prevent accidental relaxation
+
+6. **Secure Backup Procedures**:
+   - Establish dedicated backup processes for secrets
+   - Keep backups encrypted with different keys than production
+   - Implement a secure recovery protocol
 
 ### Configuration Approach
 
