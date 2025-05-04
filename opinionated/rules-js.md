@@ -24,6 +24,7 @@ With AI assistance, many traditional constraints change:
 - **Historical context is preserved** - AI maintains awareness of decisions over time
 
 This ruleset prioritizes:
+
 1. **Practices optimized for AI understanding**
 2. **Solutions for individual developers or small teams**
 3. **Minimal, resilient approaches** over complex tooling
@@ -63,6 +64,7 @@ The following decisions have been **carefully considered** and are **not open fo
 - Use `UPPER_SNAKE_CASE` for constants and configuration values
 - Use `snake_case` for variables, functions, and method names
 - Follow verb-based naming patterns for similar operations:
+
   ```javascript
   // Resource creation functions start with "create_"
   function create_user() {}
@@ -113,7 +115,7 @@ We recommend using **Jest** for testing with these opinionated approaches:
 ### Test-Driven Development Process
 
 1. **Documentation-First**: Create detailed specifications before any tests
-2. **Deterministic Test Creation**: 
+2. **Deterministic Test Creation**:
    - Extract function signatures, parameter types, and return types
    - Convert examples to test cases
    - Create tests for edge cases and error conditions
@@ -121,6 +123,7 @@ We recommend using **Jest** for testing with these opinionated approaches:
 4. **Refactor**: Improve code while maintaining test coverage
 
 Tests must verify:
+
 - All documented function paths (success and error)
 - All boundary conditions and edge cases
 - All examples provided in documentation
@@ -216,6 +219,7 @@ Our opinionated development workflow follows these sequential phases:
 ### Documentation-First Approach
 
 Create comprehensive text-based documentation that is:
+
 - **Complete**: Covers all behaviors including edge cases
 - **Precise**: Specifies exact input/output relationships
 - **Testable**: Includes concrete examples
