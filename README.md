@@ -78,6 +78,11 @@ User Need: "Improve AI System Quality"
 └── Communication Excellence → Aligna
 ```
 
+### Specialized Content Migration
+- **Technical Review Patterns**: Moved to [AI Review Validation](../guardrails-info/docs/ai_review_validation.md) in Guardrails project
+- **Instruction Design Patterns**: Moved to [AI Review Patterns](../ai-instructions/cleaned/ai-review-patterns.md) in AI-instructions project
+- **Communication Excellence**: Focused development in Aligna for human-AI collaboration
+
 ### Core Focus Areas
 - **[Project Analysis 2025](PROJECT_ANALYSIS_2025.md)**: Complete strategic analysis and positioning
 - **Communication Frameworks**: Human-AI collaborative patterns

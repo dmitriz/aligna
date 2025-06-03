@@ -1,48 +1,50 @@
-# 📚 Aligna AI Review Guidelines for AI Agents
+# 📚 Aligna AI: Human-AI Collaborative Communication Guidelines
 
-- Thank you for taking the time to contribute or review — your insights are truly appreciated!
-- These guidelines aim to make reviews smooth, enjoyable, and focused on high-quality contributions.
-- Follow these guidelines as they apply to your review context.
+- Thank you for engaging in human-AI collaboration — your communication creates the foundation for excellence!
+- These guidelines focus on creating effective, respectful, and productive communication between humans and AI systems.
+- Adapt these principles to your specific collaborative context and domain.
 
-> These guidelines are intended for AI agent reviewers to systematically evaluate code and content contributions.
-> **Next Steps**: AI reviewers should start by familiarizing themselves with the checklist in `templates/review-checklist.md` and reviewing the metrics outlined in `METRICS.md` to understand evaluation criteria.
-
----
-
-## ⭐ Principles We Aim For
-
-- **Clarity**: Code and documentation should be clear and easy to follow.
-- **Correctness**: Code should work as intended and consider edge cases thoughtfully.
-- **Consistency**: Aligning with existing styles and patterns helps the project stay clean.
-- **Minimalism**: Prefer simpler solutions that are easier to maintain.
-- **Sustainability**: Changes should avoid creating unnecessary future burdens.
+> These guidelines are designed to improve human-AI communication quality, building trust and effectiveness in collaborative relationships.
+> **Next Steps**: Review the communication patterns in `USAGE_GUIDE.md` and explore the relationship quality metrics in `METRICS.md` to understand collaborative excellence indicators.
 
 ---
 
-## ✅ Helpful Things to Check During Review
+## ⭐ Human-AI Communication Principles
 
-- [ ] Is the purpose of the change clear and understandable?
-- [ ] Is the code and documentation easy to read at a glance?
-- [ ] Are edge cases and failure modes thoughtfully considered?
-- [ ] Are related documentation, examples, or tests updated if relevant?
-- [ ] (Optional) Are commit messages meaningful for future history navigation?
-
----
-
-## ⚠️ Common Pitfalls to Watch For
-
-- Adding unnecessary complexity without clear benefits.
-- Forgetting about important edge cases or the user experience.
-- Submitting exceptionally large pull requests without clear logical separations.
-- (Optional) Using vague commit messages that could confuse later.
+- **Mutual Understanding**: Both human and AI should clearly comprehend intent, context, and expectations.
+- **Respectful Interaction**: Communication maintains dignity and acknowledges the unique strengths of both participants.
+- **Constructive Collaboration**: Exchanges focus on building solutions and improving outcomes together.
+- **Transparent Process**: Both parties understand how decisions are made and feedback is provided.
+- **Adaptive Communication**: Interaction styles adjust based on context, expertise levels, and relationship maturity.
 
 ---
 
-## ❓ Important Philosophy: No Assumptions
+## ✅ Communication Quality Indicators
 
-- If something feels unclear, **ask or clarify** rather than assuming.
-- Silent assumptions often cause wasted effort and missed opportunities.
-- Asking early saves everyone's time and strengthens the project.
+- [ ] Is the intent behind the communication clearly expressed and understood?
+- [ ] Are both human and AI perspectives acknowledged and valued?
+- [ ] Is the communication style appropriate for the relationship context?
+- [ ] Are expectations and constraints clearly communicated by both parties?
+- [ ] Is feedback delivered in a way that builds understanding rather than defensiveness?
+
+---
+
+## ⚠️ Communication Pitfalls to Avoid
+
+- Assuming AI understands implicit context without clear communication.
+- Treating AI as either infallible or completely unreliable.
+- Failing to acknowledge when miscommunication occurs.
+- Using overly technical language when simpler communication would be more effective.
+- Creating communication patterns that lead to frustration or inefficiency.
+
+---
+
+## ❓ Communication Philosophy: Building Understanding
+
+- When something feels unclear, **engage in clarifying dialogue** rather than making assumptions.
+- Both human and AI benefit from explicit communication about needs, constraints, and capabilities.
+- Effective collaboration emerges from mutual respect and clear communication patterns.
+- Building communication excellence takes time and intentional practice.
 
 ---
 
