@@ -71,7 +71,8 @@
 **Aligna works as part of a comprehensive AI development ecosystem**:
 
 ### Cross-Project Synergy
-```
+
+```text
 User Need: "Improve AI System Quality"
 ├── Technical Safety → [Guardrails-info](../guardrails-info)
 ├── Instruction Design → [AI-instructions](../ai-instructions)  
@@ -79,7 +80,37 @@ User Need: "Improve AI System Quality"
 ```
 
 ### Core Focus Areas
+
 - **[Project Analysis 2025](PROJECT_ANALYSIS_2025.md)**: Complete strategic analysis and positioning
 - **Communication Frameworks**: Human-AI collaborative patterns
 - **Psychological Safety**: Trust-building and empathetic interactions
 - **Research Integration**: Latest 2024-2025 human-AI collaboration findings
+
+---
+
+## 📚 Resources
+
+### Current Framework (Being Updated)
+
+- **[Review Guidelines](REVIEW_GUIDELINES.md)**: Core communication principles
+- **[Usage Guide](USAGE_GUIDE.md)**: Implementation strategies
+- **[Metrics](METRICS.md)**: Measuring communication effectiveness
+
+### Strategic Documentation
+
+- **[Project Analysis 2025](PROJECT_ANALYSIS_2025.md)**: Comprehensive analysis and future direction
+- **[Examples](examples/)**: Practical implementation examples
+
+---
+
+## 🚀 Future Development
+
+**Phase 1 (Current)**: Content restructuring and focus refinement
+
+**Phase 2**: Framework development for psychological safety and dynamic interactions
+
+**Phase 3**: Research integration and evidence-based communication guidelines
+
+**Phase 4**: Cross-project coordination and ecosystem integration
+
+See [Project Analysis 2025](PROJECT_ANALYSIS_2025.md) for detailed roadmap and strategic positioning.
